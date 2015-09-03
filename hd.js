@@ -106,7 +106,7 @@ var showPictures = function() {
     '0008.jpg',
     '0009.jpg',
     '0010.jpg',
-    '0011.jpg',
+    '0011.gif',
     '0012.jpg',
     '0013.jpg',
     '0014.jpg',
