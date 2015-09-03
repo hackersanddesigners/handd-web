@@ -1,12 +1,24 @@
 <!doctype html>
 <html ng-app="handd">
   <head>
+ 	<title>HACKERS & DESIGNERS</title>
+ 	<link href="handd.css" rel="stylesheet" type="text/css">
+
+ 	<!-- Angular stuff - JBG -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
     <script src="handd.js"></script>
+
   </head>
   <body>
     <div ng-view></div>
+    <a id="pics-link">Show photos</a>
+    <div id="photos"></div>
+ 	<a id="close">X</a>
+
+ 	<!-- This is the oldschool photos and stuff - JBG -->
+    <script src="hd.js"></script>
+    
   </body>
 </html>
