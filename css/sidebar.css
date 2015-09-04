@@ -17,7 +17,7 @@
 .navbar {
     min-width: 550px;
     position: fixed;
-    z-index: 10;
+    z-index: 1;
 }
 
 .sidebar-nav {
@@ -45,6 +45,10 @@
     background: rgba(255,255,255,0.2);
 }
 
+.sidebar-nav li:active {
+  background: rgba(255,255,255,0.1);
+}
+
 .sidebar-nav li:active,
 .sidebar-nav li:focus {
     text-decoration: none;
@@ -59,7 +63,7 @@
 }
 
 .run:hover:before {
-    content: 'exec '
+    content: 'run '
 }
 
 .ls:hover:before {

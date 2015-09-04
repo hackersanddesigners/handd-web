@@ -7,10 +7,10 @@
       </div>
       <div class="row">
         <ul class="sidebar-nav" ng-show="sideNavToggle">
-          <a ng-href="#/"><li class="cd">Home</li></a>
-          <a ng-href="#/meetups"><li class="cd">Meetups</li></a>
-          <a ng-href="#/summeracademy"><li class="cd">SummerAcademy</li></a>
-          <a ng-click="picToggle=!picToggle"><li class="run">Photos</li></a>
+          <a ng-href="#/" ng-click="sideNavToggle=!sideNavToggle"><li class="cd">Home</li></a>
+          <a ng-href="#/meetups" ng-click="sideNavToggle=!sideNavToggle"><li class="cd">Meetups</li></a>
+          <a ng-href="#/summeracademy" ng-click="sideNavToggle=!sideNavToggle"><li class="cd">SummerAcademy</li></a>
+          <a ng-click="picsToggle=!picsToggle; sideNavToggle=!sideNavToggle"><li class="run">Photos</li></a>
         </ul>
       </div>
     </nav>
@@ -25,10 +25,16 @@
           </div>
         </div>
       </div>
-      <div class="terminal" ng-show="picToggle">
-        <div id="photos"></div>
-        <a >X</a>
-      </div>
     </div>
   </div>
 </div>
+
+<div ng-controller="PhotosCtrl">
+  <div ng-show="picsToggle">
+    <li ng-repeat="photo in photos">
+      <img ng-src="images/{{photo}}" ng-draggable class="drag">
+    </li>
+    <a class="closer" ng-click="picsToggle=!picsToggle">X</a>
+  </div>
+</div>
+<!-- This is the oldschool photos and stuff - JBG -->
