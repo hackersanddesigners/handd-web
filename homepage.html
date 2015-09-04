@@ -1,1 +1,33 @@
-<p ng-bind-html="homepage.html | unsafe"></p>
+<div id="wrapper" class="container-fluid">
+
+  <!-- Sidebar Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top col-md-4 terminal" style="background:red;">
+      <div class="row">
+        <h1>&gt; Hackers&Designers:{{ page.title }}$ <a ng-click="sideNavToggle=!sideNavToggle">ls</a></h1>
+      </div>
+      <div class="row">
+        <ul class="sidebar-nav" ng-show="sideNavToggle">
+          <a ng-click=""><li class="cd">Home</li></a>
+          <a ng-click=""><li class="cd">Meetups</li></a>
+          <a ng-click=""><li class="cd">SummerAcademy</li></a>
+          <a id="pics-link" ng-click="picToggle=!picToggle"><li class="run">Photos</li></a>
+        </ul>
+      </div>
+    </nav>
+
+  <!-- Page Content -->
+    <div id="page-content-wrapper" class="col-md-offset-4">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="container-fluid">
+            <p ng-bind-html="homepage.html | unsafe"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="terminal" ng-show="picToggle">
+      <div id="photos"></div>
+      <a id="close">X</a>
+    </div>
+  </div>
+</div>

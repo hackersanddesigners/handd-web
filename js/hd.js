@@ -10,7 +10,7 @@ var _offsetX = 0;
 var _offsetY = 0;
 var _dragElement;
 var _oldZIndex = 0;
-var _zindex = 10;
+var _zindex = 9999;
 
 var fadeOut = function() {
   document.getElementById('photos').style.display = 'none';  
@@ -68,6 +68,7 @@ function onMouseUp(e) {
 }
 
 var photosInitialized = false;
+
 function displayImages() {
 
   if(!photosInitialized) {

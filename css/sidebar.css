@@ -1,0 +1,79 @@
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+
+#page-content-wrapper {
+    position: relative;
+    padding: 15px;
+}
+
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: relative;
+    top: 0;
+    margin: 0;
+    padding: 10;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 0px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+}
+
+.sidebar-nav li:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li:active,
+.sidebar-nav li:focus {
+    text-decoration: none;
+}
+
+.cd:hover:before {
+    content: 'cd /';
+}
+
+.run:hover:before {
+    content: 'exec '
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 0px;
+    }
+
+    #sidebar-wrapper {
+        width: 300px;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+
+}

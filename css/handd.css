@@ -1,9 +1,20 @@
+@font-face {
+  font-family: 'Glass';
+  src: url('../fonts/Glass_TTY_VT220.eot');
+  src: url('../fonts/Glass_TTY_VT220.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Glass_TTY_VT220.woff') format('woff'),
+    url('../fonts/Glass_TTY_VT220.ttf')  format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
 * {
   margin: 0px;
 }
 
 body {
-	color: #f00;
+  background: #000;
+	color: #fff;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
 }
 
@@ -13,25 +24,25 @@ h2 {
 }
 
 a {
-  font-size: 24px;
+  color: #000;
+  font-size: inherit;
 }
 
 a:link {
-  color: #f00;
+  color: #000;
   text-decoration: none;
 }
 
 a:visited {
-  color: #f00;
   text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:active {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .red-white {
@@ -78,12 +89,13 @@ p {
 }
 
 #photos {
-  display: none;
+  display: block;
 	position: absolute;
 	top: 0px;
 	left: 0px;
 	width: 100%;
 	height: 100%;
+  z-index:99999;
 }
 
 #close {
@@ -94,9 +106,17 @@ p {
 	position: absolute;
 	top: 5px;
 	right: 20px;
-	z-index: 1;
+	z-index: 99999999;
 }
 
-#pics-link {
-  margin-left: 80px;
+.nav, .pagination, .carousel, .panel-title, a { cursor: pointer; }
+
+.terminal {
+  font-family: 'Glass' !important;
+  color: #fff !important;
 }
+
+.header {
+  color: #00FF00;
+}
+

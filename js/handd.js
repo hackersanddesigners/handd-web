@@ -1,4 +1,4 @@
-angular.module('handd', ['ngRoute'])
+angular.module('handd', ['ngRoute', 'ui.bootstrap'])
 
 .value('wikiUrl', 'http://52.19.102.72/mediawiki/api.php')
 
