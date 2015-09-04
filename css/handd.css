@@ -24,12 +24,12 @@ h2 {
 }
 
 a {
-  color: #000;
+  color: #0f0;
   font-size: inherit;
 }
 
 a:link {
-  color: #000;
+  color: #0f0;
   text-decoration: none;
 }
 
@@ -38,6 +38,7 @@ a:visited {
 }
 
 a:hover {
+  color:#fff;
   text-decoration: none;
 }
 
@@ -108,15 +109,3 @@ p {
 	right: 20px;
 	z-index: 99999999;
 }
-
-.nav, .pagination, .carousel, .panel-title, a { cursor: pointer; }
-
-.terminal {
-  font-family: 'Glass' !important;
-  color: #fff !important;
-}
-
-.header {
-  color: #00FF00;
-}
-

@@ -6,22 +6,19 @@
 
 /* Toggle Styles */
 
-#wrapper {
-    padding-left: 0px;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-
-
 #page-content-wrapper {
-    position: relative;
-    padding: 15px;
+    position: absolute;
+    top:60px;
 }
 
 
 /* Sidebar Styles */
+
+.navbar {
+    min-width: 550px;
+    position: fixed;
+    z-index: 10;
+}
 
 .sidebar-nav {
     position: relative;
@@ -53,6 +50,10 @@
     text-decoration: none;
 }
 
+.ls {
+    width: 20px;
+}
+
 .cd:hover:before {
     content: 'cd /';
 }
@@ -61,13 +62,80 @@
     content: 'exec '
 }
 
+.ls:hover:before {
+    content: 'ls'
+}
+
+
+@keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: #fff;
+  }
+}
+
+@-moz-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: #fff;
+  }
+}
+
+@-webkit-keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: #fff;
+  }
+}
+
+@-ms-keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: #fff;
+  }
+}
+
+@-o-keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: #fff;
+  }
+}
+
+.blink {
+  font-weight: 100;
+  font-size: 30px;
+  color: #2E3D48;
+  -webkit-animation: 1s blink step-end infinite;
+  -moz-animation: 1s blink step-end infinite;
+  -ms-animation: 1s blink step-end infinite;
+  -o-animation: 1s blink step-end infinite;
+  animation: 1s blink step-end infinite;
+}
+
+.nav, .pagination, .carousel, .panel-title, a { cursor: pointer; }
+
+.terminal {
+  font-family: 'Glass' !important;
+  color: #fff !important;
+  padding-left: 10px;
+  text-align: left;
+  font-size: 25px;
+}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 0px;
-    }
-
-    #sidebar-wrapper {
-        width: 300px;
     }
 
     #page-content-wrapper {
