@@ -11,7 +11,7 @@ angular.module('handd', ['ngRoute'])
 .service('Homepage', function(wikiUrl, $http) {
   var self = this;
   this.fetch = function (callback) {
-    $http.get(wikiUrl+'?action=parse&page=Hackers_%26_Designers&format=json').then(function(res) {
+    $http.get(wikiUrl+'?action=parse&page=HD-meet-ups&format=json').then(function(res) {
       var obj = res.data;
       callback(obj.parse.text['*']);
     });
