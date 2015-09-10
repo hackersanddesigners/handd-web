@@ -66,9 +66,12 @@
     content: 'run '
 }
 
-.ls:hover:before {
-    content: 'ls'
+.menu:hover, .ls:hover:before{
+  content: 'ls'
 }
+/*.ls:hover:before {
+    
+}*/
 
 
 @keyframes "blink" {

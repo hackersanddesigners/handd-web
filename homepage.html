@@ -3,14 +3,16 @@
   <!-- Sidebar Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top col-sm-5 terminal">
       <div class="row">
-        <h3 style="display:inline-block;white-space: nowrap;text-align:left;padding-left:20px;">&gt; H&ampD:{{ homepage.title }}$ <a ng-click="sideNavToggle=!sideNavToggle" style="color:#fff"><span class="ls"><span class="blink">_ </span></span></a></h3>
+        <a class="menu" ng-click="sideNavToggle=!sideNavToggle" style="color:#fff"><h3 style="display:inline-block;white-space: nowrap;text-align:left;padding-left:20px;">&gt; H&ampD:{{ homepage.title }}$ <span class="ls"><span class="blink">_ </span></span></h3></a>
       </div>
       <div class="row">
-        <ul class="sidebar-nav" ng-show="sideNavToggle">
-          <a ng-href="#/" ng-click="sideNavToggle=!sideNavToggle"><li class="cd">Home</li></a>
+        <ul class="sidebar-nav" ng-show="sideNavToggle" ng-controller="categoryCtrl">
+          <a ng-repeat="item in items" ng-click="sideNavToggle=!sideNavToggle;" ng-href="#/page/{{item.pageid}}"><li class="cd">{{item.title}}</li></a>
+          
+<!--           <a ng-href="#/" ng-click="sideNavToggle=!sideNavToggle"><li class="cd">Home</li></a>
           <a ng-href="#/meetups" ng-click="sideNavToggle=!sideNavToggle"><li class="cd">Meetups</li></a>
-          <a ng-href="#/summeracademy" ng-click="sideNavToggle=!sideNavToggle"><li class="cd">SummerAcademy</li></a>
-          <a ng-click="picsToggle=!picsToggle; sideNavToggle=!sideNavToggle"><li class="run">Photos</li></a>
+          <a ng-href="#/summeracademy" ng-click="sideNavToggle=!sideNavToggle"><li class="cd">SummerAcademy</li></a>-->
+          <a ng-click="picsToggle=!picsToggle; sideNavToggle=!sideNavToggle"><li class="run">Photos</li></a> 
         </ul>
       </div>
     </nav>
@@ -21,7 +23,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="container-fluid">
-            <p ng-bind-html="homepage.content | unsafe"></p>
+            <p change-url ng-bind-html="homepage.content | unsafe"></p>
           </div>
         </div>
       </div>
@@ -37,4 +39,5 @@
     <a class="closer" ng-click="picsToggle=!picsToggle">X</a>
   </div>
 </div>
+
 <!-- This is the oldschool photos and stuff - JBG -->

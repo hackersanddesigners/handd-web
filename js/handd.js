@@ -8,6 +8,25 @@ angular.module('handd', ['ngRoute', 'ui.bootstrap'])
   };
 })
 
+.directive('changeUrl', function ($compile, $timeout) {
+    return {
+        restrict: 'EA',
+        scope: true,
+        link: function (scope, elem, attrs) {
+            $timeout(function() {
+                console.log('replace');
+                var href = elem.children('a').attr('href');
+                elem.children('a').attr('href', null);
+                elem.children('a').attr('ng-click', '$location.path(#"href")');
+                $compile(elem.contents())(scope);
+            });
+            scope.open = function (url) {
+                alert(url);
+            }
+        }
+    }
+})
+
 .directive('ngDraggable', function($document, $window){
   function makeDraggable(scope, element, attr) {
     var startX = 0;
@@ -104,26 +123,19 @@ angular.module('handd', ['ngRoute', 'ui.bootstrap'])
 
 .config(function($routeProvider) {
   $routeProvider
-  .when('/', {
-    controller:'HomepageCtrl as homepage',
+  .when('/page/:pageid', {
+    controller: 'pageCtrl',
     templateUrl:'homepage.html',
     resolve: {
     }
   })
-  .when('/meetups', {
-    controller: 'MeetupsCtrl as homepage',
+  .when('/mediawiki/index.php/:title', {
+    controller: 'titleCtrl',
     templateUrl:'homepage.html',
     resolve: {
-
     }
   })
-  .when('/summeracademy', {
-    controller: 'SummerAcademyCtrl as homepage',
-    templateUrl:'homepage.html',
-    resolve: {
-
-    }
-  })
+  .otherwise({ redirectTo: '/page/30' });
 })
 
 .controller('PhotosCtrl', ['$scope', function($scope){
@@ -150,39 +162,27 @@ angular.module('handd', ['ngRoute', 'ui.bootstrap'])
     '0020.jpg'];
 }])
 
-.controller('HomepageCtrl', function(Homepage) {
-  var homepage = this;
-  Homepage.fetchContent(function(content) {
-    console.log(content);
-    homepage.content = content; 
-  });
-  Homepage.fetchTitle(function(title) {
-    console.log(title);
-    homepage.title = title; 
+.controller('categoryCtrl', function(wikiUrl, $scope, $http, $location) {
+  $http.get(wikiUrl + '?action=query&list=categorymembers&format=json&cmtitle=Category%3AHackers%26Designers').success(function(response) {
+    $scope.items = response.query.categorymembers;
   });
 })
-
-.controller('MeetupsCtrl', function(Meetups) {
+.controller('titleCtrl', function(wikiUrl, $routeParams, $scope, $http) {
+  $scope.title = $routeParams.title;
   var homepage = this;
-  Meetups.fetchContent(function(content) {
-    console.log(content);
-    homepage.content = content; 
-  });
-  Meetups.fetchTitle(function(title) {
-    console.log(title);
-    homepage.title = title; 
+  $http.get(wikiUrl + '?action=parse&format=json&page=' + $routeParams.title).success(function(response){
+    homepage.title = response.parse.title;
+    homepage.content = response.parse.text['*'];
+    $scope.homepage = homepage;
   });
 })
-
-.controller('SummerAcademyCtrl', function(Summeracademy) {
+.controller('pageCtrl', function(wikiUrl, $routeParams, $scope, $http) {
+  $scope.pageid = $routeParams.pageid;
   var homepage = this;
-  Summeracademy.fetchContent(function(content) {
-    console.log(content);
-    homepage.content = content; 
-  });
-  Summeracademy.fetchTitle(function(title) {
-    console.log(title);
-    homepage.title = title; 
+  $http.get(wikiUrl + '?action=parse&format=json&pageid=' + $routeParams.pageid).success(function(response){
+    homepage.title = response.parse.title;
+    homepage.content = response.parse.text['*'];
+    $scope.homepage = homepage;
   });
 });
         
