@@ -1,6 +1,6 @@
 angular.module('handd', ['ngRoute'])
 
-.value('wikiUrl', 'http://52.19.102.72/mediawiki/api.php')
+.value('wikiUrl', 'http://wiki.hackersanddesigners.nl/mediawiki/api.php')
 
 .filter('unsafe', function($sce) {
   return function(val) {
