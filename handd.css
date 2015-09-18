@@ -97,6 +97,6 @@ p {
 	z-index: 1;
 }
 
-#pics-link {
+#pics-link, .link {
   margin-left: 80px;
 }
