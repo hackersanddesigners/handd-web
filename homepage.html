@@ -8,10 +8,6 @@
       <div class="row">
         <ul class="sidebar-nav" ng-show="sideNavToggle" ng-controller="categoryCtrl">
           <a ng-repeat="item in items" ng-click="sideNavToggle=!sideNavToggle;" ng-href="#/page/{{item.pageid}}"><li class="cd">{{item.title}}</li></a>
-          
-<!--           <a ng-href="#/" ng-click="sideNavToggle=!sideNavToggle"><li class="cd">Home</li></a>
-          <a ng-href="#/meetups" ng-click="sideNavToggle=!sideNavToggle"><li class="cd">Meetups</li></a>
-          <a ng-href="#/summeracademy" ng-click="sideNavToggle=!sideNavToggle"><li class="cd">SummerAcademy</li></a>-->
           <a ng-click="picsToggle=!picsToggle; sideNavToggle=!sideNavToggle"><li class="run">Photos</li></a> 
         </ul>
       </div>
