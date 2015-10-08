@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <title>Hackers & Designers</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet">
+    <link rel="stylesheet" href="assets/app.css"/>
+
+    <style type="text/css">
+        /**
+         * Hide when Angular is not yet loaded and initialized
+         */
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+          display: none !important;
+        }
+    </style>
+
+  </head>
+
+  <body ng-app="myApp" layout="row" layout-fill ng-controller="AppCtrl as vm" ng-cloak >
+
+  <md-sidenav flex sidenav-push-in class="site-sidenav md-sidenav-left md-sidenav-color" md-component-id="left" md-is-open="false" layout="row">
+    <md-content layout="column" flex>
+        <md-content layout="row" layout-padding layout-align="start center">
+          <h1 flex>Hackers&<br>Designers</h1>
+            <ul flex layout="column" class="navigation">
+                <a href="#"><li flex>about</li></a>
+                <a href="#"><li flex>contact</li></a>
+                <a href="#"><li flex>newsletter</li></a>
+            </ul>
+        </md-content>
+
+        <md-content layout="row" layout-padding>
+            <md-input-container class="md-icon-float">
+                <label>search</label>
+                <md-icon class="material-icons">search</md-icon>
+                <input type="text">
+            </md-input-container>
+        </md-content>
+        <md-content>
+          <md-list> <!-- repeat for every year-->
+              <md-subheader>next</md-subheader>
+              <md-list-item layout="row">
+                  <span>date</span><span>title of meetup bla bla bla bla bla</span>
+              </md-list-item>
+              <md-subheader>2015</md-subheader>
+              <md-list-item layout="row">
+                  <span>date</span><span>title of meetup bla bla bla bla bla</span>
+              </md-list-item>
+              <md-list-item layout="row">
+                  <span>date</span><span>title of meetup bla bla bla bla bla</span>
+              </md-list-item>
+              <md-list-item layout="row">
+                  <span>date</span><span>title of meetup bla bla bla bla bla</span>
+              </md-list-item>
+              <md-list-item layout="row">
+                  <span>date</span><span>title of meetup bla bla bla bla bla</span>
+              </md-list-item>
+              <md-subheader>2014</md-subheader>
+              <md-list-item layout="row">
+                  <span>date</span><span>title of meetup bla bla bla bla bla</span>
+              </md-list-item>
+              <md-list-item layout="row">
+                  <span>date</span><span>title of meetup bla bla bla bla bla</span>
+              </md-list-item>
+              <md-list-item layout="row">
+                  <span>date</span><span>title of meetup bla bla bla bla bla</span>
+              </md-list-item>
+              <md-list-item layout="row">
+                  <span>date</span><span>title of meetup bla bla bla bla bla</span>
+              </md-list-item>
+              <md-list-item layout="row">
+                  <span>date</span><span>title of meetup bla bla bla bla bla</span>
+              </md-list-item>
+              <md-list-item layout="row">
+                  <span>date</span><span>title of meetup bla bla bla bla bla</span>
+              </md-list-item>
+          </md-list>
+        </md-content>
+    </md-content>
+  </md-sidenav>
+
+    <div flex="" layout="row" class="md-sidenav-push-in-target">
+        <div id="toggle-left" class="toggle md-sidenav-color" ng-click="toggleLeft()">
+            <div class="vertical-text">meet-ups</div>
+        </div>
+
+        <md-content flex layout-padding="" class="main-content-color">
+            <div ng-view></div>
+        </md-content>
+        <div id="toggle-right" class="toggle md-sidenav-color" ng-click="toggleRight()">
+            <div class="vertical-text">summer academy</div>
+        </div>
+
+    </div>
+
+
+  <md-sidenav flex sidenav-push-in class="site-sidenav md-sidenav-right md-sidenav-color" md-component-id="right" md-is-open="false" layout="row">
+      <md-content layout="column" flex>
+
+          <md-content layout="row" layout-margin layout-align="start center">
+              <h1 flex>summer<br>academy</h1>
+              <ul flex layout="column" class="navigation">
+                  <a href="#"><li flex>about</li></a>
+                  <a href="#"><li flex>apply</li></a>
+                  <a href="#"><li flex>newsletter</li></a>
+              </ul>
+          </md-content>
+
+          <md-content layout-margin>
+              <md-input-container class="md-icon-float">
+                  <label>search</label>
+                  <md-icon class="material-icons">search</md-icon>
+                  <input type="text">
+              </md-input-container>
+          </md-content>
+        <md-content>
+          <md-list> <!-- repeat for every year-->
+              <md-subheader>2016</md-subheader>
+              <md-list-item layout="row">
+                  <span>To be announced</span>
+              </md-list-item>
+              <md-subheader>2015</md-subheader>
+              <md-list-item layout="row">
+                  <span>About bugs, bots & bytes</span>
+              </md-list-item>
+              <md-subheader>2014</md-subheader>
+              <md-list-item layout="row">
+                  <span>Back to the Future</span>
+              </md-list-item>
+          </md-list>
+        </md-content>
+      </md-content>
+  </md-sidenav>
+
+    <script src="./bower_components/angular/angular.js"></script>
+    <script src="./bower_components/angular-animate/angular-animate.js"></script>
+    <script src="./bower_components/angular-aria/angular-aria.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
+
+    <!--<script src="./src/users/Users.js"></script>-->
+    <!--<script src="./src/users/UserController.js"></script>-->
+    <!--<script src="./src/users/UserService.js"></script>-->
+
+    <script type="text/javascript">
+
+          angular
+              .module('myApp', ['ngMaterial', 'ngRoute', ])
+              .value('wikiUrl', 'http://wiki.hackersanddesigners.nl/mediawiki/api.php')
+              .config(function($mdThemingProvider, $routeProvider){
+
+                      $mdThemingProvider.theme('default')
+                          .primaryPalette('brown')
+                          .accentPalette('red');
+                      $routeProvider
+                              .when('/', {
+                                  controller:'HomepageController as homepage',
+                                  templateUrl:'homepage.html',
+                                  resolve: {
+                                  }
+                              })
+                      })
+                      .filter('unsafe', function($sce) {
+                      return function(val) {
+                          return $sce.trustAsHtml(val);
+                      };
+                  })
+                  .service('Utils', function() {
+                      var self = this;
+                      this.cleanLinks = function(html) {
+                          var el = angular.element(html.text);
+                          var links = el.find('a');
+                          console.log(links.attr('href'));
+                          for(var i = 0; i < links.length; i++) {
+                              var href  = angular.element(links[i]).attr('href');
+                              if(href.indexOf('mediawiki') != -1) {
+                                  var params = href.split('?');
+                                  if(params.length > 1) {
+                                      var keyValues = params[1].split('&');
+                                      for(var j = 0; j < keyValues.length; j++) {
+                                          var keyValue = keyValues[j].split('=');
+                                          if(keyValue[0] == 'title') {
+                                              return '{{ keyValue[1] }}'
+                                          }
+                                      }
+                                  }
+                                  return 'http://wiki.hackersanddesigners.nl' + href;
+                              }
+                              return href;
+                          }
+                      };
+//                      this.cleanImg = function(html) {
+//                          var el = angular.element(html);
+//                          var imgsrc =  el.find('a');
+//                          console.log(imgsrc);
+//                      }
+                  })
+                  .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $mdUtil, $log) {
+
+                      $scope.toggleLeft = buildToggler('left');
+                      $scope.toggleRight = buildToggler('right');
+
+                      /**
+                       * Build handler to open/close a SideNav; when animation finishes
+                       * report completion in console
+                       */
+                      function buildToggler(navID) {
+                          var debounceFn =  $mdUtil.debounce(function(){
+                              $mdSidenav(navID)
+                                      .toggle()
+                                      .then(function () {
+                                          $log.debug("toggle " + navID + " is done");
+                                      });
+                          },200);
+
+                          return debounceFn;
+                      }
+
+                  })
+                  .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+                      $scope.close = function () {
+                          $mdSidenav('left').close()
+                                  .then(function () {
+                                      $log.debug("close LEFT is done");
+                                  });
+
+                      };
+                  })
+                  .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+                      $scope.close = function () {
+                          $mdSidenav('right').close()
+                                  .then(function () {
+                                      $log.debug("close RIGHT is done");
+                                  });
+                      };
+                  })
+                  .controller('HomepageController', function(Homepage, Utils) {
+                      var homepage = this;
+                      Homepage.fetch(function(html) {
+                          Utils.cleanLinks(html);
+                          homepage.html = html;
+                      });
+                  })
+                  .directive('sidenavPushIn', function () {
+                      return {
+                          restrict: 'A',
+                          require: '^mdSidenav',
+                          link: function ($scope, element, attr, sidenavCtrl) {
+                              var body = angular.element(document.body);
+                              body.addClass('md-sidenav-push-in');
+                              var cssClass = (element.hasClass('md-sidenav-left') ? 'md-sidenav-left' : 'md-sidenav-right') + '-open';
+                              var stateChanged = function (state) {
+                                  body[state ? 'addClass' : 'removeClass'](cssClass);
+                              };
+                              // overvwrite default functions and forward current state to custom function
+                              angular.forEach(['open', 'close', 'toggle'], function (fn) {
+                                  var org = sidenavCtrl[fn];
+                                  sidenavCtrl[fn] = function () {
+                                      var res = org.apply(sidenavCtrl, arguments);
+                                      stateChanged(sidenavCtrl.isOpen());
+                                      return res;
+                                  };
+                              });
+                          }
+                      };
+                  }).service('Homepage', function(wikiUrl, $http) {
+                      var self = this;
+                      this.fetch = function(callback) {
+                          $http.get(wikiUrl+'?action=parse&page=%27Awkward%27_Error&format=json').then(function(res) {
+                              var obj = res.data;
+                              html = {
+                                  'date' : 'DD.MM',
+                                  'title' : obj.parse.title,
+                                  'text' : obj.parse.text['*']
+                              };
+                              callback(html);
+                          });
+                      };
+                  });
+    </script>
+
+  </body>
+</html>
