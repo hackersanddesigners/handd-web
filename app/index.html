@@ -180,30 +180,40 @@
                       this.cleanLinks = function(html) {
                           var el = angular.element(html.text);
                           var links = el.find('a');
-                          console.log(links.attr('href'));
                           for(var i = 0; i < links.length; i++) {
-                              var href  = angular.element(links[i]).attr('href');
-                              if(href.indexOf('mediawiki') != -1) {
-                                  var params = href.split('?');
-                                  if(params.length > 1) {
-                                      var keyValues = params[1].split('&');
-                                      for(var j = 0; j < keyValues.length; j++) {
-                                          var keyValue = keyValues[j].split('=');
-                                          if(keyValue[0] == 'title') {
-                                              return '{{ keyValue[1] }}'
-                                          }
-                                      }
-                                  }
-                                  return 'http://wiki.hackersanddesigners.nl' + href;
-                              }
-                              return href;
+                            var link = links['' + i];
+                            var linkEl = angular.element(link);
+                            var href = linkEl.attr('href');
+                            if(href.indexOf('mediawiki') != -1) {
+                              var paths = href.split('/');
+                              var last = paths[paths.length - 1];
+
+                              // TODO : go to page with this title (Search wiki). . .blah - JBG
+
+                            }
                           }
                       };
-//                      this.cleanImg = function(html) {
-//                          var el = angular.element(html);
-//                          var imgsrc =  el.find('a');
-//                          console.log(imgsrc);
-//                      }
+                      this.cleanImages = function(html) {
+                          var el = angular.element(html.text);
+                          var img = el.find('img');
+                          for(var i = 0; i < img.length; i++) {
+                            var img = img['' + i];
+                            var imgEl = angular.element(img);
+                            var src = imgEl.attr('src');
+                            var srcUrl = 'http://wiki.hackersanddesigners.nl' + src;
+                            imgEl.attr('src', srcUrl);
+
+                            /*
+                            if(href.indexOf('mediawiki') != -1) {
+                              var paths = href.split('/');
+                              var last = paths[paths.length - 1];
+
+                              // TODO : go to page with this title (Search wiki). . .blah - JBG
+
+                            }
+                            */
+                          }
+                      };
                   })
                   .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $mdUtil, $log) {
 
@@ -247,7 +257,8 @@
                   .controller('HomepageController', function(Homepage, Utils) {
                       var homepage = this;
                       Homepage.fetch(function(html) {
-                          Utils.cleanLinks(html);
+                          //Utils.cleanLinks(html);
+                          Utils.cleanImages(html);
                           homepage.html = html;
                       });
                   })
