@@ -10,7 +10,7 @@ angular.module('handd', ['ngRoute'])
 .service('Homepage', function(wikiUrl, $http) {
   var self = this;
   this.fetch = function(callback) {
-    $http.get(wikiUrl+'?action=parse&page=Jeremy_Bailey_ad1&format=json').then(function(res) {
+    $http.get(wikiUrl+'?action=parse&page=Hackers_%26_Designers&format=json').then(function(res) {
       var obj = res.data;
       html = obj.parse.text['*'];
       callback(html);
