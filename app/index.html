@@ -49,11 +49,13 @@
   <md-sidenav flex sidenav-push-in class="site-sidenav md-sidenav-right md-sidenav-color" md-component-id="right" md-is-open="false" layout="row">
       <div ui-view="sidenavRight"></div>
   </md-sidenav>
+
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="./bower_components/angular/angular.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.js"></script>
   <script src="./bower_components/angular-animate/angular-animate.js"></script>
     <script src="./bower_components/angular-aria/angular-aria.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-sanitize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
     <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
   <script src="./src/components/directives/directives.js"></script>
@@ -63,7 +65,7 @@
     <!--<script src="./src/users/UserService.js"></script>-->
 
     <script type="text/javascript">
-        var myApp =  angular.module('myApp', ['ngMaterial', 'ui.router', 'wikiDirectives']);
+        var myApp =  angular.module('myApp', ['ngMaterial', 'ui.router', 'wikiDirectives', 'ngSanitize']);
 
         myApp.value('wikiUrl', 'http://wiki.hackersanddesigners.nl/mediawiki/api.php')
               .config(function($mdThemingProvider, $stateProvider, $urlRouterProvider){
@@ -91,7 +93,6 @@
                                   }
                               }
                           })
-
                   });
 
               myApp.controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $mdUtil, $log) {
@@ -160,25 +161,23 @@
 
                             }
                             */
-                          }
-                      };
-                  })
-
-                  .service('Page', function(wikiUrl, $http) {
-                      var self = this;
-                      this.fetch = function(callback) {
-                          $http.get(wikiUrl+'?action=parse&page=%27Awkward%27_Error&format=json').then(function(res) {
-                              var obj = res.data;
-                              html = {
-                                  'date' : 'DD.MM',
-                                  'title' : obj.parse.title,
-                                  'text' : obj.parse.text['*']
-                              };
-                              callback(html);
-                          });
-                      };
-                  });
-
+                        }
+                    };
+                })
+                    .service('Page', function(wikiUrl, $http) {
+                        var self = this;
+                        this.fetch = function(pageId, callback) {
+                            $http.get(wikiUrl+'?action=parse&page=' + pageId + '&format=json').then(function(res) {
+                                var obj = res.data;
+                                html = {
+                                    'date' : 'DD.MM',
+                                    'title' : obj.parse.title,
+                                    'text' : obj.parse.text['*']
+                                };
+                                callback(html);
+                            });
+                        };
+                    });
 
     </script>
   <script src="./src/components/Page/main-controller.js"></script>
