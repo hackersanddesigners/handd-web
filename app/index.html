@@ -235,15 +235,17 @@
                             var src = el.prop('src');
                             if(src) {
                               src = src.replace(/.*?:\/\//g, '');
-                              var srcUrl = wikiUrl + src;
-                              el.attr('src', srcUrl);
+                              var str = '.*?/mediawiki';
+                              var re = new RegExp(str, 'g');
+                              src = src.replace(re, wikiUrl + '/mediawiki');
+                              el.attr('src', src);
                             }
 
                             // Fix srcset attr - JBG
                             var srcset = el.prop('srcset');
                             if(srcset) {
                               srcset = srcset.replace(/.*?:\/\//g, '');
-                              var str = '/mediawiki';
+                              var str = '.*?/mediawiki';
                               var re = new RegExp(str, 'g');
                               srcset = srcset.replace(re, wikiUrl + '/mediawiki');
                               el.attr('srcset', srcset);
