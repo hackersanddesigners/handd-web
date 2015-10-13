@@ -174,46 +174,6 @@
                           return $sce.trustAsHtml(val);
                       };
                   })
-                  .service('Utils', function() {
-                      var self = this;
-                      this.cleanLinks = function(html) {
-                          var el = angular.element(html.text);
-                          var links = el.find('a');
-                          for(var i = 0; i < links.length; i++) {
-                            var link = links['' + i];
-                            var linkEl = angular.element(link);
-                            var href = linkEl.attr('href');
-                            if(href.indexOf('mediawiki') != -1) {
-                              var paths = href.split('/');
-                              var last = paths[paths.length - 1];
-
-                              // TODO : go to page with this title (Search wiki). . .blah - JBG
-
-                            }
-                          }
-                      };
-                      this.cleanImages = function(html) {
-                          var el = angular.element(html.text);
-                          var img = el.find('img');
-                          for(var i = 0; i < img.length; i++) {
-                            var img = img['' + i];
-                            var imgEl = angular.element(img);
-                            var src = imgEl.attr('src');
-                            var srcUrl = 'http://wiki.hackersanddesigners.nl' + src;
-                            imgEl.attr('src', srcUrl);
-
-                            /*
-                            if(href.indexOf('mediawiki') != -1) {
-                              var paths = href.split('/');
-                              var last = paths[paths.length - 1];
-
-                              // TODO : go to page with this title (Search wiki). . .blah - JBG
-
-                            }
-                            */
-                          }
-                      };
-                  })
                   .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $mdUtil, $log) {
 
                       $scope.toggleLeft = buildToggler('left');
@@ -253,27 +213,56 @@
                                   });
                       };
                   })
-                  .controller('HomepageController', function(Homepage, Utils, $scope) {
+                  .controller('HomepageController', function(Homepage, $scope) {
                       var homepage = this;
                       Homepage.fetch(function(html) {
-                          //Utils.cleanLinks(html);
-                          /*
-                          $scope.$apply(function() {
-                            Utils.cleanImages(html);
-                          });
-                          */
                           homepage.html = html;
                       });
+                  })
+                  .directive('updateimages', function($timeout) {
+                    return {
+                      link: function(scope, element) {
+                        $timeout(function() {
+                          var images = element.find('img');
+                          for(var index in images) {
+                            var el = angular.element(images[index]);
+                            var wikiUrl = 'http://wiki.hackersanddesigners.nl';
+
+                            // Fix src attr - JBG
+                            var src = el.prop('src');
+                            src = src.replace(/.*?:\/\//g, '');
+                            var srcUrl = wikiUrl + src;
+                            el.attr('src', srcUrl);
+
+                            // Fix srcset attr - JBG
+                            var srcset = el.prop('srcset');
+                            srcset = srcset.replace(/.*?:\/\//g, '');
+                            var str = '/mediawiki';
+                            var re = new RegExp(str, 'g');
+                            srcset = srcset.replace(re, wikiUrl + '/mediawiki');
+                            el.attr('srcset', srcset);
+                            
+                          }
+                        }, 1000);
+                      }
+                    };
                   })
                   .directive('updatelinks', function($timeout) {
                     return {
                       link: function(scope, element) {
                         $timeout(function() {
-                          element.find('a').prop('target', '_blank');
-                          scope.$apply();
-                        });
-                      },
-                      restrict: 'A'
+                          var links = element.find('a');
+                          for(var index in links) {
+                            var el = angular.element(links[index]);
+                            var href = el.prop('href');
+                            if(href.indexOf('mediawiki') != -1) {
+                              var paths = href.split('/');
+                              var last = paths[paths.length - 1];
+                              el.prop('href', last);
+                            }
+                          }
+                        }, 1000);
+                      }
                     };
                   })
                   .directive('sidenavPushIn', function () {
