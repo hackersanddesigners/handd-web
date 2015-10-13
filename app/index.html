@@ -94,12 +94,11 @@
         </div>
 
         <md-content flex layout-padding="" class="main-content-color">
-            <div ng-view></div>
+            <div ng-view updatelinks></div>
         </md-content>
         <div id="toggle-right" class="toggle md-sidenav-color" ng-click="toggleRight()">
             <div class="vertical-text">summer academy</div>
         </div>
-
     </div>
 
 
@@ -155,7 +154,7 @@
     <script type="text/javascript">
 
           angular
-              .module('myApp', ['ngMaterial', 'ngRoute', ])
+              .module('myApp', ['ngMaterial', 'ngRoute'])
               .value('wikiUrl', 'http://wiki.hackersanddesigners.nl/mediawiki/api.php')
               .config(function($mdThemingProvider, $routeProvider){
 
@@ -254,13 +253,27 @@
                                   });
                       };
                   })
-                  .controller('HomepageController', function(Homepage, Utils) {
+                  .controller('HomepageController', function(Homepage, Utils, $scope) {
                       var homepage = this;
                       Homepage.fetch(function(html) {
                           //Utils.cleanLinks(html);
-                          Utils.cleanImages(html);
+                          /*
+                          $scope.$apply(function() {
+                            Utils.cleanImages(html);
+                          });
+                          */
                           homepage.html = html;
                       });
+                  })
+                  .directive('updatelinks', function($timeout) {
+                    return {
+                      link: function(scope, element) {
+                        $timeout(function() {
+                          console.log(JSON.stringify(element.find('a')));
+                          element.find('a').prop('href', '');
+                        });
+                      }
+                    };
                   })
                   .directive('sidenavPushIn', function () {
                       return {
@@ -284,7 +297,8 @@
                               });
                           }
                       };
-                  }).service('Homepage', function(wikiUrl, $http) {
+                  })
+                  .service('Homepage', function(wikiUrl, $http) {
                       var self = this;
                       this.fetch = function(callback) {
                           $http.get(wikiUrl+'?action=parse&page=%27Awkward%27_Error&format=json').then(function(res) {
