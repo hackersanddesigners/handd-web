@@ -33,5 +33,17 @@ angular.module('handd', ['ngRoute'])
   Homepage.fetch(function(html) {
     homepage.html = html; 
   });
+})
+
+.directive('updatelinks', function($timeout) {
+  return {
+    link: function(scope, element) {
+      $timeout(function() {
+        element.find('a').prop('target', '_blank');
+        scope.$apply()
+      });
+    },
+    restrict: 'A'
+  };
 });
         
