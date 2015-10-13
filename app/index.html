@@ -94,7 +94,7 @@
         </div>
 
         <md-content flex layout-padding="" class="main-content-color">
-            <div ng-view updatelinks></div>
+            <div ng-view></div>
         </md-content>
         <div id="toggle-right" class="toggle md-sidenav-color" ng-click="toggleRight()">
             <div class="vertical-text">summer academy</div>
@@ -269,10 +269,11 @@
                     return {
                       link: function(scope, element) {
                         $timeout(function() {
-                          console.log(JSON.stringify(element.find('a')));
-                          element.find('a').prop('href', '');
+                          element.find('a').prop('target', '_blank');
+                          scope.$apply();
                         });
-                      }
+                      },
+                      restrict: 'A'
                     };
                   })
                   .directive('sidenavPushIn', function () {
