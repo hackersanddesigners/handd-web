@@ -46,7 +46,7 @@ angular
       return debounceFn;
     }
   })
-  .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, Ask) {
+  .controller('LeftCtrl', function ($scope, $timeout, $q, $mdSidenav, Ask) {
     $scope.close = function () {
       $mdSidenav('left').close().then(function () {
         console.log("close LEFT is done");
@@ -54,6 +54,7 @@ angular
     };
     var meetups = this;
     var year = [2014, 2015, 2016];
+
 //    var forEachYear = function(arr, fn) {
 //      var newArray = [];
 //      for (i = 0; i < year.length; i++) {
@@ -62,10 +63,19 @@ angular
 //      return newArray;
 //    };
 //    console.log(forEachYear(year, Ask.fetch));
+
+    var objs = {};
+    var promises = [];
     for (i = 0; i < year.length; i++) {
-      Ask.fetch(year[i], function(data) {
-        meetups.stuff = data.query.results;
-      });
+      promises.push(Ask.fetch(year[i], function(data) {
+        var obj = data.query.results;
+        if(!Array.isArray(obj)) {
+          for (var attr in obj) { objs[attr] = obj[attr]; }
+        }
+      }));
+      $q.all(promises).then(function() {
+        meetups.stuff = objs;
+      })
     };
   })
   .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
@@ -173,11 +183,10 @@ angular
     var self = this;
     this.fetch = function(year, callback) {
       var query = '[[Category:Meetups]][[In Year::' + year + ']]|?On Date|?Location|format=array';
-      $http.get(wikiUrl + '?action=ask&query=' + query + '&format=json').then(function(res) {
+      return $http.get(wikiUrl + '?action=ask&query=' + query + '&format=json').then(function(res) {
         var obj;
         obj = res.data;
         callback(obj);
-//        return obj;
       });
     };
   });
