@@ -85,12 +85,19 @@ angular
       });
     };
   })
-  .controller('HomepageController', function(Homepage, $scope, $routeParams) {
+  .controller('HomepageController', function(Homepage, $scope, $routeParams, $anchorScroll) {
     var homepage = this;
     var wikipage = $routeParams.wikipage || 'Hackers_%26_Designers';
     Homepage.fetch(wikipage, function(html) {
       homepage.html = html;
     });
+//    $scope.scrollTo = function(id) {
+//      var old = $location.hash();
+//      $location.hash(id);
+//      $anchorScroll();
+//      //reset to old to keep any additional routing logic from kicking in
+//      $location.hash(old);
+//    };
   })
   .directive('updateimages', function($timeout) {
     return {
@@ -132,11 +139,24 @@ angular
           for(var index in links) {
             var el = angular.element(links[index]);
             var href = el.prop('href');
+            //dealing with these unruly anchorlinks
+            if(href && href.indexOf('#') != -1) {
+              el.prop('href', null);
+              //Trying to get angular $scope.scrollTo() to work. No luck so far
+//              var anchorLink = href.split('#')[1];
+//              var linkToEl = 'scrollTo("' + anchorLink + '")';
+//              console.log(linkToEl);
+//              el.prop('ng-click', linkToEl);
+            };
             if(href && href.indexOf('mediawiki') != -1) {
               var paths = href.split('/');
               var last = paths[paths.length - 1];
               el.prop('href', '#/' + last);
-            }
+            };
+            //removes href for files/images
+            if (href && href.indexOf('File') != -1) {
+              el.prop('href', null);
+            };
           }
         }, 1000);
       }
