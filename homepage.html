@@ -1,11 +1,11 @@
 <div class="content"  updatelinks updateimages>
 	<div class="menu left" ng-click="showMenu($event)">
-		<h1>{{ homepage.leftTitle }}</h1>
+		<h1 class="title">{{ homepage.leftTitle }}</h1>
 		<p ng-bind-html="homepage.leftMenu | unsafe"></p>
 	</div>
 	<p class="main" ng-bind-html="homepage.html | unsafe"></p>
 	<div class="menu right" ng-click="showMenu($event)">
-		<h1>{{ homepage.rightTitle }}</h1>
+		<h1 class="title">{{ homepage.rightTitle }}</h1>
 		<p ng-bind-html="homepage.rightMenu | unsafe"></p>
 	</div>
 </div>

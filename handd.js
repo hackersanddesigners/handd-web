@@ -1,5 +1,6 @@
-angular.module('handd', ['ngRoute'])
+var layoutMenus = true;
 
+angular.module('handd', ['ngRoute'])
 .value('wikiUrl', 'http://wiki.hackersanddesigners.nl/mediawiki/api.php')
 .filter('unsafe', function($sce) {
   return function(val) {
@@ -47,15 +48,17 @@ angular.module('handd', ['ngRoute'])
     };
 
     Homepage.fetch(wikipage, function(html) {
-        homepage.html = html.text;    
+      homepage.html = html.text;    
     });
-
+    
     Homepage.fetch('HD-meet-ups', function(html) {
-        homepage.leftMenu = html.text;
+      homepage.leftTitle = html.title;
+      homepage.leftMenu = html.text;
     });
 
     Homepage.fetch('Hackers_%26_Designers_Summer_Academy', function(html) {
-        homepage.rightMenu = html.text;    
+      homepage.rightTitle = html.title;
+      homepage.rightMenu = html.text;    
     });
 })
 

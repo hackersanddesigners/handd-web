@@ -77,3 +77,19 @@ a:active {
 .menu p {
   padding: 40px;
 }
+
+.menu .title {
+  top: 50%;
+  position: absolute;
+  transform-origin: center center 0;
+}
+
+.menu.left .title {
+  right: -80px;
+  transform: rotate(-90deg);
+}
+
+.menu.right .title {
+  transform: rotate(90deg);
+  left: -280px;
+}
