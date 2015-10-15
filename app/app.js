@@ -33,9 +33,9 @@ angular
      * report completion in console
      */
     function buildToggler(navID, oppositeNav) {
-      var debounceFn =  $mdUtil.debounce(function(){
+      var debounceFn =  $mdUtil.debounce(function() {
         $mdSidenav(navID).toggle().then(function () {
-          if($mdSidenav(navID).isOpen()){
+          if ($mdSidenav(navID).isOpen()) {
             $mdSidenav(oppositeNav).close();
             $log.debug(navID + " is open");
           } else {
@@ -47,13 +47,20 @@ angular
     }
   })
   .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, Ask) {
-    $scope.close = function () {
-      $mdSidenav('left').close().then(function () {
-        console.log("close LEFT is done");
-      });
-    };
     var meetups = this;
-    var year = [2014, 2015, 2016];
+    var year = [2015];
+  
+//    $scope.close = function () {
+//      $mdSidenav('left').close().then(function () {
+//        console.log("close LEFT is done");
+//      });
+//    };
+  
+//    for (i = 0; i < year.length; i++) {
+      Ask.fetch(year, function(data) {
+        meetups.stuff = data.query.results;
+      });
+//    };
 //    var forEachYear = function(arr, fn) {
 //      var newArray = [];
 //      for (i = 0; i < year.length; i++) {
@@ -62,20 +69,28 @@ angular
 //      return newArray;
 //    };
 //    console.log(forEachYear(year, Ask.fetch));
-    for (i = 0; i < year.length; i++) {
-      Ask.fetch(year[i], function(data) {
-        meetups.stuff = data.query.results;
-      });
-    };
+  //LIKE THIS /\ OR LIKE THIS \/?
+//    function buildList(obj){
+//      for (i = 0; i < obj.length; i++) {
+//        console.log(currentYear);
+//        Ask.fetch(currentYear, function(data) {
+//          currentYear.push(data.query.results);
+//          console.log(currentYear);
+//        })(obj[i]);
+//      }
+//    };
+//    buildList(years);
+    
   })
   .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
-    $scope.close = function () {
-      $mdSidenav('right').close().then(function () {
-        $log.debug("close RIGHT is done");
-      });
-    };
+//    $scope.close = function () {
+//      $mdSidenav('right').close().then(function () {
+//        $log.debug("close RIGHT is done");
+//      });
+//    };
+  
   })
-  .controller('HomepageController', function(Homepage, $scope, $routeParams) {
+  .controller('HomepageController', function(Homepage, $scope, $routeParams){
     var homepage = this;
     var wikipage = $routeParams.wikipage || 'Hackers_%26_Designers';
     Homepage.fetch(wikipage, function(html) {
@@ -176,6 +191,7 @@ angular
       $http.get(wikiUrl + '?action=ask&query=' + query + '&format=json').then(function(res) {
         var obj;
         obj = res.data;
+        console.log(obj);
         callback(obj);
 //        return obj;
       });
