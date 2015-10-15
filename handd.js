@@ -35,15 +35,55 @@ angular.module('handd', ['ngRoute'])
   });
 })
 
+.directive('updateimages', function($timeout) {
+  return {
+    link: function(scope, element) {
+      $timeout(function() {
+        var images = element.find('img');
+        for(var index in images) {
+          var el = angular.element(images[index]);
+          var wikiUrl = 'http://wiki.hackersanddesigners.nl';
+          // Fix src attr - JBG
+          var src = el.prop('src');
+          if(src) {
+            src = src.replace(/.*?:\/\//g, '');
+            var str = '.*?/mediawiki';
+            var re = new RegExp(str, 'g');
+            src = src.replace(re, wikiUrl + '/mediawiki');
+            el.attr('src', src);
+          }
+
+          // Fix srcset attr - JBG
+          var srcset = el.prop('srcset');
+          if(srcset) {
+            srcset = srcset.replace(/.*?:\/\//g, '');
+            var str = '.*?/mediawiki';
+            var re = new RegExp(str, 'g');
+            srcset = srcset.replace(re, wikiUrl + '/mediawiki');
+            el.attr('srcset', srcset);
+          }
+        }
+      }, 1000);
+    }
+  };
+})
+
 .directive('updatelinks', function($timeout) {
   return {
     link: function(scope, element) {
       $timeout(function() {
-        element.find('a').prop('target', '_blank');
-        scope.$apply()
-      });
-    },
-    restrict: 'A'
+        var links = element.find('a');
+        for(var index in links) {
+          var el = angular.element(links[index]);
+          var href = el.prop('href');
+          if(href && href.indexOf('mediawiki') != -1) {
+            var paths = href.split('/');
+            var last = paths[paths.length - 1];
+            el.prop('href', '#/' + last);
+          }
+        }
+      }, 1000);
+    }
   };
 });
         

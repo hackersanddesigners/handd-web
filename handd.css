@@ -3,7 +3,8 @@
 }
 
 body {
-	color: #f00;
+  background: #000;
+	color: #fff;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
 }
 
@@ -66,13 +67,30 @@ a {
 	z-index: 1;
 }
 
+.menu {
+  background: #fff;
+  color: #000;
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  width: 320px;
+}
+
+.menu.left {
+  left: 0px;
+}
+
+.menu.right {
+  right: 0px;
+}
+
+/*
 p {
   color: #00f;
   font-family: "Times New Roman", Times, serif;
   font-size: 46pt;
   margin: 0px 40px 0px 40px;
 }
-
 .drag {
 	position: absolute;
 }
@@ -100,3 +118,4 @@ p {
 #pics-link, .link {
   margin-left: 80px;
 }
+*/
