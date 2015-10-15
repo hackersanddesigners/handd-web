@@ -9,10 +9,14 @@ angular.module('handd', ['ngRoute'])
 
 .service('Homepage', function(wikiUrl, $http) {
   var self = this;
-  this.fetch = function(callback) {
-    $http.get(wikiUrl+'?action=parse&page=Hackers_%26_Designers&format=json').then(function(res) {
+  this.fetch = function(wikipage, callback) {
+    $http.get(wikiUrl+'?action=parse&page=' + wikipage + '&format=json').then(function(res) {
       var obj = res.data;
-      html = obj.parse.text['*'];
+      html = {
+        'date' : 'DD.MM',
+        'title' : obj.parse.title,
+        'text' : obj.parse.text['*']
+      };
       callback(html);
     });
   };
@@ -26,13 +30,33 @@ angular.module('handd', ['ngRoute'])
     resolve: {
     }
   })
+  .when('/:wikipage', {
+    controller:'HomepageController as homepage',
+    templateUrl:'homepage.html',
+    resolve: {
+    }
+  })
 })
 
-.controller('HomepageController', function(Homepage) {
-  var homepage = this;
-  Homepage.fetch(function(html) {
-    homepage.html = html; 
-  });
+.controller('HomepageController', function(Homepage, $scope, $routeParams) {
+    var homepage = this;
+    var wikipage = $routeParams.wikipage || 'Hackers_%26_Designers';
+
+    $scope.showMenu = function($event) {
+      angular.element($event.currentTarget).toggleClass('showing');
+    };
+
+    Homepage.fetch(wikipage, function(html) {
+        homepage.html = html.text;    
+    });
+
+    Homepage.fetch('HD-meet-ups', function(html) {
+        homepage.leftMenu = html.text;
+    });
+
+    Homepage.fetch('Hackers_%26_Designers_Summer_Academy', function(html) {
+        homepage.rightMenu = html.text;    
+    });
 })
 
 .directive('updateimages', function($timeout) {
