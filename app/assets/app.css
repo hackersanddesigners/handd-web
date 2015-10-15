@@ -17,6 +17,7 @@ a {
   width: 40px;
   overflow: visible;
   position: relative;
+  z-index: 10;
   padding:5px;
 }
 
@@ -39,39 +40,6 @@ a {
 md-sidenav {
   z-index: 1;
 }
-
-/*md-sidenav.md-closed {*/
-  /*z-index: 0;*/
-  /*display: flex;*/
-  /*display: -webkit-flex;*/
-  /*display: -ms-flexbox;*/
-/*}*/
-
-/*.md-sidenav-left {*/
-  /*left: 0;*/
-  /*top: 0;*/
-  /*-webkit-transform: translate(0%, 0);*/
-  /*transform: translate(0%, 0);*/
-/*}*/
-
-/*.md-sidenav-left.md-closed {*/
-  /*-webkit-transform: translate(-270px, 0);*/
-  /*transform: translate(-270px, 0);*/
-/*}*/
-
-/*.md-sidenav-right {*/
-  /*position: relative;*/
-  /*right: -80px;*/
-  /*top: 0;*/
-  /*-webkit-transform: translate(0%, 0);*/
-  /*transform: translate(0%, 0);*/
-/*}*/
-
-/*.md-sidenav-right.md-closed {*/
-  /*-webkit-transform: translate(270px, 0);*/
-  /*transform: translate(270px, 0);*/
-/*}*/
-
 
 /*APPEARANCE*/
 .md-sidenav-color {
