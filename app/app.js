@@ -25,19 +25,24 @@ angular
     };
   })
   .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $mdUtil, $log) {
-    $scope.toggleLeft = buildToggler('left');
-    $scope.toggleRight = buildToggler('right');
+    $scope.toggleLeft = buildToggler('left', 'right');
+    $scope.toggleRight = buildToggler('right', 'left');
 
     /**
      * Build handler to open/close a SideNav; when animation finishes
      * report completion in console
      */
-    function buildToggler(navID) {
+    function buildToggler(navID, oppositeNav) {
       var debounceFn =  $mdUtil.debounce(function(){
         $mdSidenav(navID).toggle().then(function () {
-          $log.debug("toggle " + navID + " is done");
+          if($mdSidenav(navID).isOpen()){
+            $mdSidenav(oppositeNav).close();
+            $log.debug(navID + " is open");
+          } else {
+            $log.debug(navID + " is closed");
+          }
         });
-      },200);
+      },50);
       return debounceFn;
     }
   })

@@ -47,7 +47,7 @@
         <md-content>
           <md-list ng-repeat="item in meetups.stuff"> <!-- repeat for every year-->
               <a ng-href="#/{{item.fulltext}}"><md-list-item layout="row">
-                  <span>{{item.printouts['On Date'][0].fulltext}}</span><p>{{item.fulltext}}</p>
+                  <span style="padding-right:10px;">{{item.printouts['On Date'][0].fulltext}}</span><p>{{item.fulltext}}</p>
               </md-list-item></a>
           </md-list>
         </md-content>
