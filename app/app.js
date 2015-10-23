@@ -48,13 +48,11 @@ angular
   })
   .controller('LeftCtrl', function ($scope, $timeout, $q, $mdSidenav, Ask) {
     $scope.close = function () {
-      $mdSidenav('left').close().then(function () {
-        console.log("close LEFT is done");
-      });
+      $mdSidenav('left').close();
     };
     var meetups = this;
     var year = [2014, 2015, 2016];
-
+    
 //    var forEachYear = function(arr, fn) {
 //      var newArray = [];
 //      for (i = 0; i < year.length; i++) {
@@ -62,13 +60,14 @@ angular
 //      };
 //      return newArray;
 //    };
-//    console.log(forEachYear(year, Ask.fetch));
+//    console.log(forEachYear(year, Ask.fetchList));
 
     var objs = {};
     var promises = [];
     for (i = 0; i < year.length; i++) {
-      promises.push(Ask.fetch(year[i], function(data) {
+      promises.push(Ask.fetchList(year[i], function(data) {
         var obj = data.query.results;
+        
         if(!Array.isArray(obj)) {
           for (var attr in obj) { objs[attr] = obj[attr]; }
         }
@@ -77,12 +76,11 @@ angular
         meetups.stuff = objs;
       })
     };
+    
   })
   .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
     $scope.close = function () {
-      $mdSidenav('right').close().then(function () {
-        $log.debug("close RIGHT is done");
-      });
+      $mdSidenav('right').close();
     };
   })
   .controller('HomepageController', function(Homepage, $scope, $routeParams, $anchorScroll) {
@@ -190,8 +188,9 @@ angular
     this.fetch = function(wikipage, callback) {
       $http.get(wikiUrl+'?action=parse&page=' + wikipage + '&format=json&disableeditsection=true').then(function(res) {
         var obj = res.data;
+        console.log(obj);
         html = {
-          'date' : 'DD.MM',
+          'date' : obj.parse.templates.hasOwnProperty('Category'),
           'title' : obj.parse.title,
           'text' : obj.parse.text['*']
         };
@@ -201,11 +200,9 @@ angular
   })
   .service('Ask', function(wikiUrl, $http) {
     var self = this;
-    this.fetch = function(year, callback) {
+    this.fetchList = function(year, callback) {
       var query = '[[Category:Events]][[Type::Meetup]]|?NameOfEvent|?OnDate|?Venue|?Time|sort=OnDate|order=descending';
       
-//      old one
-//      var query = '[[Category:Events]][[In Year::' + year + ']]|?On Date|?Location|format=array';
       return $http.get(wikiUrl + '?action=ask&query=' + query + '&format=json').then(function(res) {
         var obj;
         obj = res.data;

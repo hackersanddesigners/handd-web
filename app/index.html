@@ -27,27 +27,27 @@
 
   <body ng-app="myApp" layout="row" layout-fill ng-controller="AppCtrl as vm" ng-cloak >
   <md-sidenav flex sidenav-push-in class="site-sidenav md-sidenav-left md-sidenav-color" md-component-id="left" md-is-open="false" layout="row">
-    <md-content layout="column" flex  ng-controller="LeftCtrl as meetups">
-        <md-content layout="row" layout-padding layout-align="start center">
-          <h1 flex>Hackers&<br>Designers</h1>
-            <ul flex layout="column" class="navigation">
-                <a href="#/"><li flex>about</li></a>
-                <a href="mailto:info@hackersanddesigners.com"><li flex>contact</li></a>
-                <a href="#/"><li flex>newsletter</li></a>
-            </ul>
-        </md-content>
+    <md-content layout="column" flex ng-controller="LeftCtrl as meetups">
+        <div layout="row" layout-padding layout-align="start center">
+          <h1 flex layout-padding>Hackers&<br />Designers</h1>
+          <ul flex layout="column" class="navigation" layout-padding>
+            <a href="#/"><li flex>about</li></a>
+            <a href="mailto:info@hackersanddesigners.com"><li flex>contact</li></a>
+            <a href="#/"><li flex>newsletter</li></a>
+          </ul>
+        </div>
 
-        <md-content layout="row" layout-padding>
+        <div layout-margin layout-align="start center">
             <md-input-container class="md-icon-float">
                 <label>search</label>
                 <md-icon class="material-icons">search</md-icon>
-                <input type="text">
+                <input type="text" >
             </md-input-container>
-        </md-content>
-        <md-content>
+        </div>
+        <md-content flex>
           <md-list ng-repeat="item in meetups.stuff"> <!-- repeat for every year-->
               <a ng-href="#/{{item.fulltext}}"><md-list-item layout="row">
-                  <span style="padding-right:10px;">{{item.printouts['On Date'][0].fulltext}}</span><p>{{item.fulltext}}</p>
+                  <span style="padding-right:10px;">{{item.printouts.OnDate*1000}}</span><p>{{item.fulltext}}</p>
               </md-list-item></a>
           </md-list>
         </md-content>
@@ -59,7 +59,7 @@
       <div class="vertical-text">meet-ups</div>
     </div>
 
-    <md-content flex layout-padding="" class="main-content-color">
+    <md-content flex layout-padding class="main-content-color">
       <div ng-view></div>
     </md-content>
     <div id="toggle-right" class="toggle md-sidenav-color" ng-click="toggleRight()">
@@ -69,23 +69,21 @@
 
   <md-sidenav flex sidenav-push-in class="site-sidenav md-sidenav-right md-sidenav-color" md-component-id="right" md-is-open="false" layout="row">
       <md-content layout="column" flex>
-
-          <md-content layout="row" layout-margin layout-align="start center">
-              <h1 flex>summer<br>academy</h1>
-              <ul flex layout="column" class="navigation">
-                  <a href="#/"><li flex>about</li></a>
-                  <a href="#/"><li flex>apply</li></a>
-                  <a href="#/"><li flex>newsletter</li></a>
-              </ul>
-          </md-content>
-
-          <md-content layout-margin>
-              <md-input-container class="md-icon-float">
-                  <label>search</label>
-                  <md-icon class="material-icons">search</md-icon>
-                  <input type="text">
-              </md-input-container>
-          </md-content>
+        <div layout="row" layout-padding layout-align="start center">
+            <h1 flex layout-padding>summer<br />academy</h1>
+            <ul flex layout="column" class="navigation" layout-padding>
+                <a href="#/"><li flex>about</li></a>
+                <a href="#/"><li flex>apply</li></a>
+                <a href="#/"><li flex>newsletter</li></a>
+            </ul>
+        </div>
+        <div layout-margin>
+            <md-input-container class="md-icon-float">
+                <label>search</label>
+                <md-icon class="material-icons">search</md-icon>
+                <input type="text">
+            </md-input-container>
+        </div>
         <md-content>
           <md-list> <!-- repeat for every year-->
               <md-subheader>2016</md-subheader>
