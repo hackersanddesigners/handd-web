@@ -188,7 +188,7 @@ angular
   .service('Homepage', function(wikiUrl, $http) {
     var self = this;
     this.fetch = function(wikipage, callback) {
-      $http.get(wikiUrl+'?action=parse&page=' + wikipage + '&format=json').then(function(res) {
+      $http.get(wikiUrl+'?action=parse&page=' + wikipage + '&format=json&disableeditsection=true').then(function(res) {
         var obj = res.data;
         html = {
           'date' : 'DD.MM',
@@ -202,7 +202,10 @@ angular
   .service('Ask', function(wikiUrl, $http) {
     var self = this;
     this.fetch = function(year, callback) {
-      var query = '[[Category:Meetups]][[In Year::' + year + ']]|?On Date|?Location|format=array';
+      var query = '[[Category:Events]][[Type::Meetup]]|?NameOfEvent|?OnDate|?Venue|?Time|sort=OnDate|order=descending';
+      
+//      old one
+//      var query = '[[Category:Events]][[In Year::' + year + ']]|?On Date|?Location|format=array';
       return $http.get(wikiUrl + '?action=ask&query=' + query + '&format=json').then(function(res) {
         var obj;
         obj = res.data;
