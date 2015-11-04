@@ -1,11 +1,11 @@
-<div class="content"  updatelinks updateimages>
-	<div class="menu left" ng-click="showMenu($event)">
-		<h1 class="title">{{ homepage.leftTitle }}</h1>
-		<p ng-bind-html="homepage.leftMenu | unsafe"></p>
-	</div>
-	<p class="main" ng-bind-html="homepage.html | unsafe"></p>
-	<div class="menu right" ng-click="showMenu($event)">
-		<h1 class="title">{{ homepage.rightTitle }}</h1>
-		<p ng-bind-html="homepage.rightMenu | unsafe"></p>
-	</div>
+<div class="container">
+  <div class="content">
+    <div class="header">
+      <h3 class="art-header">{{ homepage.html.OnDate ? formatDate(homepage.html.OnDate) : '' }}</h3>
+      <h3 class="art-header">{{ homepage.html.Venue ? formatStr(homepage.html.Venue) : '' }}</h3>
+      <h1 ng-bind="homepage.html.title">Article title</h1>
+      <h3>{{ homepage.html.Venue ? formatStr(homepage.html.PeopleOrganisations) : '' }}</h3>
+    </div>
+    <p ng-bind-html="homepage.html.text | unsafe" updatelinks updateimages></p>
+  </div>
 </div>

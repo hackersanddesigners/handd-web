@@ -12,7 +12,33 @@
 
   </head>
   <body>
-    <div ng-view></div>
+    <div ng-controller="LeftNavController">
+      <div class="menu left" ng-click="showMenu($event)">
+        <h1 class="title vertical-text left">{{ title }}</h1>
+        <ul class="links">
+          <li><a href="#/">about</a></li>
+          <li><a href="mailto:info@hackersanddesigners.nl">contact</a></li>
+          <li><a href="http://eepurl.com/bjue1D">newsletter</a></li>
+        </ul>
+        <div class="list">
+          <div class="item" ng-repeat="item in meetups">
+            <a ng-href="#/{{item.fulltext}}">
+              <p class="date">{{ formatDate(item.printouts.OnDate[0]) }}</p>
+              <p>{{item.fulltext}}</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-controller="HomepageController">
+      <div ng-view></div>
+    </div>
+    <div ng-controller="RightNavController">
+      <div class="menu right" ng-click="showMenu($event)">
+        <h1 class="title vertical-text right">{{ title }}</h1>
+        <p ng-bind-html="homepage.rightMenu | unsafe"></p>
+      </div>      
+    </div>
 
 <!--
 <a id="pics-link">Show photos</a><br/>
