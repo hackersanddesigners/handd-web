@@ -8,8 +8,8 @@ body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
   width: 100%;
   font-size: 28px;
-  height: 100%;
-  overflow-x: hidden;
+  min-height: 100%;
+  overflow: hidden;
 }
 
 table {
