@@ -33,15 +33,27 @@ angular.module('handd', ['ngRoute'])
   };
 })
 
-.service('Ask', function(wikiUrl, $http) {
+.service('Ask', function(wikiUrl, $http, $q) {
   var self = this;
-  this.fetchList = function(year, callback) {
-    var query = '[[Category:Events]][[Type::Meetup]]|?NameOfEvent|?OnDate|?Venue|?Time|sort=OnDate|order=descending';
+  this.fetchList = function(type, callback) {
+    var objs = {};
+    var promises = [];
+    var query = '[[Category:Events]][[Type::' + type + ']]|?NameOfEvent|?OnDate|?Venue|?Time|sort=OnDate|order=descending';
     var url = wikiUrl + '?action=ask&query=' + query + '&format=json';
     console.log(url);
-    return $http.get(url).then(function(res) {
-      callback(res.data);
+    //promises.push(
+    $http.get(url).then(function(res) {
+      //Aucallback(res.data);
+      var data = res.data;
+      var obj = data.query.results;
+      if(!Array.isArray(obj)) {
+        for (var attr in obj) { objs[attr] = obj[attr]; }
+      }
+      callback(objs);
+    //}));
     });
+    //$q.all(promises).then(function() {
+    //});
   };
 })
 
@@ -78,41 +90,32 @@ angular.module('handd', ['ngRoute'])
     });
 })
 
-.controller('LeftNavController', function(Ask, $scope, $q, $timeout) {
+.controller('LeftNavController', function(Ask, $scope) {
   $scope.title = 'MEETUPS';  
   $scope.showMenu = function($event) {
     angular.element($event.currentTarget).toggleClass('showing');
   };
-
   $scope.formatDate = function(dateStr) {
     var date = new Date(parseInt(dateStr) * 1000);
     return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
   };
-
-  var year = [2014, 2015, 2016];
-
-  var objs = {};
-  var promises = [];
-  for (i = 0; i < year.length; i++) {
-    promises.push(Ask.fetchList(year[i], function(data) {
-      var obj = data.query.results;
-
-      if(!Array.isArray(obj)) {
-        for (var attr in obj) { objs[attr] = obj[attr]; }
-      }
-    }));
-    $q.all(promises).then(function() {
-      $scope.meetups = objs;
-      console.log(JSON.stringify(meetups));
-    })
-  }
+  Ask.fetchList('Meetup', function(objs) {
+    $scope.events = objs;
+  });
 })
 
-.controller('RightNavController', function($scope, $routeParams) {
+.controller('RightNavController', function(Ask, $scope) {
   $scope.title = 'SUMMERY ACADEMY';  
   $scope.showMenu = function($event) {
     angular.element($event.currentTarget).toggleClass('showing');
   };
+  $scope.formatDate = function(dateStr) {
+    var date = new Date(parseInt(dateStr) * 1000);
+    return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+  };
+  Ask.fetchList('Summer Academy', function(objs) {
+    $scope.events = objs;
+  });
 })
 
 .directive('updateimages', function($timeout) {

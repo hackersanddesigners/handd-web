@@ -75,6 +75,11 @@ ul {
 }
 
 .menu {
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 0%;
+
   background: #fff;
   color: #000;
   position: absolute;
@@ -118,8 +123,12 @@ ul {
 }
 
 .menu .list {
-  overflow-y: scroll;
-  height: 100%;
+  display: block;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1 1 0%;
+  box-sizing: border-box;
   width: 280px;
 }
 
