@@ -19,9 +19,7 @@ angular.module('handd', ['ngRoute'])
         'text' : obj.parse.text['*']
       };
       var semanticApiUrl = wikiUrl + '?action=browsebysubject&subject=' + wikipage + '&format=json';
-      console.log(semanticApiUrl);
       $http.get(semanticApiUrl).then(function(res) {
-        console.log(JSON.stringify(res.data));
         var data = res.data.query.data;
         for(var i = 0; i < data.length; i++) {
           var item = data[i];
@@ -40,7 +38,6 @@ angular.module('handd', ['ngRoute'])
     var promises = [];
     var query = '[[Category:Events]][[Type::' + type + ']]|?NameOfEvent|?OnDate|?Venue|?Time|sort=OnDate|order=descending';
     var url = wikiUrl + '?action=ask&query=' + query + '&format=json';
-    console.log(url);
     //promises.push(
     $http.get(url).then(function(res) {
       //Aucallback(res.data);
@@ -54,6 +51,13 @@ angular.module('handd', ['ngRoute'])
     });
     //$q.all(promises).then(function() {
     //});
+  };
+  this.fetchImages = function(callback) {
+    var url = wikiUrl + '?action=query&list=allimages&ailimit=10&format=json'
+    $http.get(url).then(function(res) {
+      var data = res.data;
+      callback(data.query.allimages);
+    });
   };
 })
 
@@ -88,6 +92,94 @@ angular.module('handd', ['ngRoute'])
     Homepage.fetch(wikipage, function(html) {
       homepage.html = html;
     });
+})
+
+.controller('PicsController', function(Ask, $scope, $window, $document) {
+  var w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0],
+    x = (d.innerWidth || e.clientWidth || g.clientWidth) - 160,
+    y = d.innerHeight || w.innerHeight || e.clientHeight|| g.clientHeight;
+  var _startX = 0;
+  var _startY = 0;
+  var _offsetX = 0;
+  var _offsetY = 0;
+  var _dragElement;
+  var _oldZIndex = 0;
+  var _zindex = 10;
+  var photosInitialized = false;
+  var extractNumber = function(value) {
+    var n = parseInt(value);
+    return n == null || isNaN(n) ? 0 : n;
+  };
+
+  var fadeOut = function() {
+    document.getElementById('photos').style.display = 'none';  
+    document.getElementById('close').style.display = 'none';
+  };
+
+  document.querySelector('#close').onclick = fadeOut;
+
+  var onMouseDown = function(e) {
+    if (e == null) e = $window.event;
+    var target = e.target != null ? e.target : e.srcElement;
+   
+    if ((e.button == 1 && $window.event != null ||
+      e.button == 0) &&
+      target.className.indexOf('drag') > -1) {
+      _startX = e.clientX;
+      _startY = e.clientY;
+      _offsetX = extractNumber(target.style.left);
+      _offsetY = extractNumber(target.style.top);
+      _oldZIndex = target.style.zIndex;
+      target.style.zIndex = 10000;
+      _dragElement = target;
+      document.onmousemove = onMouseMove;
+      document.body.focus();
+      document.onselectstart = function () { return false; };
+      target.ondragstart = function() { return false; };
+      return false;
+    }
+  };
+
+  var onMouseMove = function(e) {
+    if (e == null) var e = window.event; 
+    _dragElement.style.left = (_offsetX + e.clientX - _startX) + 'px';
+    _dragElement.style.top = (_offsetY + e.clientY - _startY) + 'px';
+    _dragElement.style.top + ')'; 
+  };
+
+  var onMouseUp = function(e) {
+    if (_dragElement != null) {
+      _dragElement.style.zIndex = ++_zindex;
+      document.onmousemove = null;
+      document.onselectstart = null;
+      _dragElement.ondragstart = null;
+      _dragElement = null;
+    }
+  };
+
+  Ask.fetchImages(function(objs) {
+    if(!photosInitialized) {
+      photosInitialized = true;
+      document.onmousedown = onMouseDown;
+      document.onmouseup = onMouseUp;
+    }
+    document.getElementById('photos').style.display = 'block';
+    document.getElementById('close').style.display = 'block';
+
+    for(var i = 0; i < objs.length; i++) {
+      var photo = objs[i];
+      var div = document.querySelector('#photos');
+      var image = document.createElement('img');
+      image.src = photo.url;
+      image.className = 'drag';
+      image.style.top = '' + Math.random() * (y) + 'px';
+      image.style.left = '' + (Math.random() * (x) - 160) + 'px';
+      div.appendChild(image);
+    }
+  }); 
 })
 
 .controller('LeftNavController', function(Ask, $scope) {
@@ -140,7 +232,7 @@ angular.module('handd', ['ngRoute'])
           var srcset = el.prop('srcset');
           if(srcset) {
             srcset = srcset.replace(/.*?:\/\//g, '');
-            var str = '.*?/mediawiki';
+            var str = '/mediawiki';
             var re = new RegExp(str, 'g');
             srcset = srcset.replace(re, wikiUrl + '/mediawiki');
             el.attr('srcset', srcset);

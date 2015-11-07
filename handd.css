@@ -54,9 +54,28 @@ ul {
   list-style-type: none;
 }
 
+.content img {
+/*
+  max-width: 480px;
+  max-height: 320px;
+  width: auto;
+  height: auto;
+*/
+  display: block;
+  margin: 0px auto;
+  padding: 40px;
+}
+
+.content .embedvideo {
+  margin: 0px auto;
+  padding: 40px;
+}
+
 .container {
   position: absolute;
   height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .container .content {
@@ -161,5 +180,63 @@ ul {
 
 .date {
   font-size: 19px;
+}
+
+.drag {
+  position: absolute;
+}
+
+#photos {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+#photos img {
+  max-width: 320px;
+}
+
+#close {
+  font-size: 140px;
+  color: #f00;
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  top: 0px;
+  right: 100px;
+  z-index: 2;
+  -webkit-box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.75);
+}
+
+/* RESPONSIVE - JBG */
+
+@media all and (max-width:640px) {
+
+h1 {
+  font-size: 18px;
+}
+
+h2, h3 {
+  font-size: 16px;
+}
+
+p, a, span {
+  font-size: 13px;
+}
+
+img {
+  display: block;
+  max-width: 200px;
+  max-height: 200px;
+  width: auto;
+  height: auto;
+}
+
 }
 
