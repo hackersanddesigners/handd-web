@@ -81,7 +81,7 @@ angular.module('handd', ['ngRoute'])
     var homepage = this;
     $scope.formatDate = function(dateStr) {
       var items = dateStr.split('/');
-      return items[3] + '/' + items[2] + '/' + items[1];
+      return items[3] + '/' + (parseInt(items[2]) + 1) + '/' + items[1];
     };
     $scope.formatStr = function(str) {
       str = str.replace(/_/g, ' ');
@@ -189,7 +189,7 @@ angular.module('handd', ['ngRoute'])
   };
   $scope.formatDate = function(dateStr) {
     var date = new Date(parseInt(dateStr) * 1000);
-    return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+    return date.getDate() + '/' + (parseInt(date.getMonth()) + 1) + '/' + date.getFullYear();
   };
   Ask.fetchList('Meetup', function(objs) {
     $scope.events = objs;
