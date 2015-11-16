@@ -53,7 +53,7 @@ angular.module('handd', ['ngRoute'])
     //});
   };
   this.fetchImages = function(callback) {
-    var url = wikiUrl + '?action=query&list=allimages&ailimit=10&format=json'
+    var url = wikiUrl + '?action=query&list=allimages&ailimit=10&format=json&aisort=timestamp&aidir=newer'
     $http.get(url).then(function(res) {
       var data = res.data;
       callback(data.query.allimages);
@@ -251,23 +251,12 @@ angular.module('handd', ['ngRoute'])
         for(var index in links) {
           var el = angular.element(links[index]);
           var href = el.prop('href');
-          //dealing with these unruly anchorlinks
-          if(href && href.indexOf('#') != -1) {
-            el.prop('href', null);
-            //Trying to get angular $scope.scrollTo() to work. No luck so far
-//              var anchorLink = href.split('#')[1];
-//              var linkToEl = 'scrollTo("' + anchorLink + '")';
-//              console.log(linkToEl);
-//              el.prop('ng-click', linkToEl);
-          };
-          if(href && href.indexOf('mediawiki') != -1) {
+          if(href && href.indexOf('File:') != -1) {
+            el.removeAttr('href');
+          } else if(href && href.indexOf('mediawiki') != -1) {
             var paths = href.split('/');
             var last = paths[paths.length - 1];
             el.prop('href', '#/' + last);
-          };
-          //removes href for files/images
-          if (href && href.indexOf('File') != -1) {
-            el.prop('href', null);
           };
         }
       }, 1000);
