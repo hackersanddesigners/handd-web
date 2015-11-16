@@ -27,27 +27,29 @@ h2, h3 {
 }
 
 a {
-  color: #fff;
+  color: #00f;
   font-size: 28px;
 }
 
 a:link {
-  color: #fff;
+  color: #00f;
   text-decoration: none;
 }
 
 a:visited {
-  color: #fff;
+  color: #00f;
   text-decoration: none;
 }
 
 a:hover {
-  color: #fff;
   text-decoration: underline;
+  color: transparent; 
+  text-shadow: 0 0 2px rgba(0, 0, 255, 0.9);
+  
 }
 
 a:active {
-  color: #fff;
+  color: #00f;
   text-decoration: underline;
 }
 
