@@ -11,14 +11,14 @@ angular.module('handd', ['ngRoute'])
 .service('Homepage', function(wikiUrl, $http) {
   var self = this;
   this.fetch = function(wikipage, callback) {
-    var wikiApiUrl = wikiUrl+'?action=parse&page=' + wikipage + '&format=json&disableeditsection=true';
+    var wikiApiUrl = wikiUrl+'?action=parse&page=' + encodeURIComponent(wikipage) + '&format=json&disableeditsection=true';
     $http.get(wikiApiUrl).then(function(res) {
       var obj = res.data;
       html = {
         'title' : obj.parse.title,
         'text' : obj.parse.text['*']
       };
-      var semanticApiUrl = wikiUrl + '?action=browsebysubject&subject=' + wikipage + '&format=json';
+      var semanticApiUrl = wikiUrl + '?action=browsebysubject&subject=' + encodeURIComponent(wikipage) + '&format=json';
       $http.get(semanticApiUrl).then(function(res) {
         var data = res.data.query.data;
         for(var i = 0; i < data.length; i++) {
@@ -88,7 +88,7 @@ angular.module('handd', ['ngRoute'])
       str = str.slice(0, str.length - 3);
       return str;
     }
-    var wikipage = $routeParams.wikipage || 'Hackers_%26_Designers';
+    var wikipage = $routeParams.wikipage || 'Hackers_&_Designers';
     Homepage.fetch(wikipage, function(html) {
       homepage.html = html;
     });
