@@ -111,6 +111,7 @@ ul {
 
 .menu ul {
   margin-bottom: 40px;
+  padding-left: 0px;
 }
 
 .menu a, .menu a:link, .menu a:visited, .menu a:hover, .menu a:active {
@@ -143,8 +144,11 @@ ul {
   transition: right 0.25s ease-in;
 }
 
+.menu a {
+  margin-left: 40px;
+}
+
 .menu p {
-  padding-left: 40px;
   margin-right: 40px;
 }
 
@@ -159,7 +163,8 @@ ul {
 }
 
 .menu .list .item {
-  margin-bottom: 40px;
+  margin-bottom: 0px;
+  margin-left: 40px;
 }
 
 .vertical-text {
