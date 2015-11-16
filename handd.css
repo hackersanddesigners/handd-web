@@ -43,9 +43,8 @@ a:visited {
 
 a:hover {
   text-decoration: underline;
-  color: transparent; 
+  color: transparent;
   text-shadow: 0 0 2px rgba(0, 0, 255, 0.9);
-  
 }
 
 a:active {
@@ -117,6 +116,11 @@ ul {
 
 .menu a, .menu a:link, .menu a:visited, .menu a:hover, .menu a:active {
   color: #000;
+}
+
+.menu a:hover {
+  color: transparent; 
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
 }
 
 .menu.left {
