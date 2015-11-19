@@ -53,10 +53,17 @@ angular.module('handd', ['ngRoute'])
     //});
   };
   this.fetchImages = function(callback) {
-    var url = wikiUrl + '?action=query&list=allimages&ailimit=10&format=json&aisort=timestamp&aidir=newer'
+    var url = wikiUrl + '?action=query&list=allimages&ailimit=100&format=json&aisort=timestamp&aidir=newer'
     $http.get(url).then(function(res) {
       var data = res.data;
-      callback(data.query.allimages);
+      var allimages = data.query.allimages;
+      var images = [];
+      for(var i = 0; i < allimages.length; i++) {
+        if(i % 10 == 0) {
+          images.push(allimages[i]);
+        }
+      }
+      callback(images);
     });
   };
 })
