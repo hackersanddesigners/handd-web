@@ -132,6 +132,7 @@ ul {
 .menu.right {
   right: -280px;
   transition: right 0.25s ease-in;
+  overflow: hidden;
 }
 
 .menu.left.showing {
