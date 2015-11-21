@@ -204,7 +204,7 @@ angular.module('handd', ['ngRoute'])
 })
 
 .controller('RightNavController', function(Ask, $scope) {
-  $scope.title = 'SUMMERY ACADEMY';  
+  $scope.title = 'SUMMER ACADEMY';  
   $scope.showMenu = function($event) {
     angular.element($event.currentTarget).toggleClass('showing');
   };
