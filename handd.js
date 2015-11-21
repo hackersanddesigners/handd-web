@@ -189,10 +189,12 @@ angular.module('handd', ['ngRoute'])
   }); 
 })
 
-.controller('LeftNavController', function(Ask, $scope) {
+.controller('LeftNavController', function(Ask, $scope, $document) {
   $scope.title = 'MEETUPS';  
   $scope.showMenu = function($event) {
     angular.element($event.currentTarget).toggleClass('showing');
+    angular.element($event.currentTarget).css('z-index', 2);
+    angular.element($document[0].body.querySelector('.right')).css('z-index', 1);
   };
   $scope.formatDate = function(dateStr) {
     var date = new Date(parseInt(dateStr) * 1000);
@@ -203,10 +205,12 @@ angular.module('handd', ['ngRoute'])
   });
 })
 
-.controller('RightNavController', function(Ask, $scope) {
+.controller('RightNavController', function(Ask, $scope, $document) {
   $scope.title = 'SUMMER ACADEMY';  
   $scope.showMenu = function($event) {
     angular.element($event.currentTarget).toggleClass('showing');
+    angular.element($event.currentTarget).css('z-index', 2);
+    angular.element($document[0].body.querySelector('.left')).css('z-index', 1);
   };
   $scope.formatDate = function(dateStr) {
     var date = new Date(parseInt(dateStr) * 1000);
