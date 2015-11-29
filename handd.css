@@ -182,12 +182,14 @@ ul {
 }
 
 .vertical-text.left {
+  -webkit-transform: rotate(-90deg);
   transform: rotate(-90deg);
   position: absolute;
   right: -80px;
 }
 
 .vertical-text.right {
+  -webkit-transform: rotate(90deg) translate(-50px, 0px);
   transform: rotate(90deg) translate(-50px, 0px);
   position: absolute;
   left: -80px;
