@@ -3,6 +3,7 @@
     <div class="header">
       <h3 class="art-header">{{ homepage.html.OnDate ? formatDate(homepage.html.OnDate) : '' }}</h3>
       <h3 class="art-header">{{ homepage.html.Venue ? formatStr(homepage.html.Venue) : '' }}</h3>
+      <h3 class="art-header">{{ homepage.html.Time ? homepage.html.Time : '' }}</h3>
       <h1 ng-bind="homepage.html.title">Article title</h1>
       <h3>{{ homepage.html.Venue ? formatStr(homepage.html.PeopleOrganisations) : '' }}</h3>
     </div>
