@@ -196,8 +196,8 @@ angular.module('handd', ['ngRoute'])
     angular.element($event.currentTarget).css('z-index', 2);
     angular.element($document[0].body.querySelector('.right')).css('z-index', 1);
   };
-  $scope.formatDate = function(dateStr) {
-    var date = new Date(parseInt(dateStr) * 1000);
+  $scope.formatDate = function(dateObj) {
+    var date = new Date(dateObj.fulltext);
     return date.getDate() + '/' + (parseInt(date.getMonth()) + 1) + '/' + date.getFullYear();
   };
   Ask.fetchList('Meetup', function(objs) {
@@ -212,8 +212,8 @@ angular.module('handd', ['ngRoute'])
     angular.element($event.currentTarget).css('z-index', 2);
     angular.element($document[0].body.querySelector('.left')).css('z-index', 1);
   };
-  $scope.formatDate = function(dateStr) {
-    var date = new Date(parseInt(dateStr) * 1000);
+  $scope.formatDate = function(dateObj) {
+    var date = new Date(dateObj.fulltext);
     return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
   };
   Ask.fetchList('Summer Academy', function(objs) {
