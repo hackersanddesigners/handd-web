@@ -88,7 +88,10 @@ angular.module('handd', ['ngRoute'])
     var homepage = this;
     $scope.formatDate = function(dateStr) {
       var items = dateStr.split('/');
-      return items[3] + '/' + items[2] + '/' + items[1];
+      return items[2].replace(/#.*#/,'') + '/' + items[1] + '/' + items[0];
+    };
+    $scope.formatTime = function(timeStr) {
+      return timeStr.replace(/#.*#/,'');
     };
     $scope.formatStr = function(str) {
       str = str.replace(/_/g, ' ');
