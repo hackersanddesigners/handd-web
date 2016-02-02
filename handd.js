@@ -23,8 +23,9 @@ angular.module('handd', ['ngRoute'])
         var data = res.data.query.data;
         for(var i = 0; i < data.length; i++) {
           var item = data[i];
-          html[item.property] = item.dataitem[0].item;
+          html[item.property] = item.dataitem;
         }
+      console.log(JSON.stringify(html));
         callback(html);
       });
     });
@@ -86,17 +87,27 @@ angular.module('handd', ['ngRoute'])
 
 .controller('HomepageController', function(Homepage, $scope, $routeParams) {
     var homepage = this;
-    $scope.formatDate = function(dateStr) {
+    $scope.formatDate = function(date) {
+      var dateStr = date[0].item;
       var items = dateStr.split('/');
       return items[2].replace(/#.*#/,'') + '/' + items[1] + '/' + items[0];
     };
-    $scope.formatTime = function(timeStr) {
+    $scope.formatTime = function(time) {
+      var timeStr = time[0].item;
       return timeStr.replace(/#.*#/,'');
     };
     $scope.formatStr = function(str) {
       str = str.replace(/_/g, ' ');
-      str = str.slice(0, str.length);
-      return str;
+      return str.replace(/#.*#/,'');
+    }
+    $scope.formatPeople = function(people) {
+      var peopleStr = '';
+      for(var i = 0; i < people.length; i++) {
+        var personStr = people[i].item.replace(/#.*#/,'');
+        personStr = personStr.replace(/_/g, ' ');
+        peopleStr += (personStr + ((i < people.length - 1) ? ', ' : ''));
+      }
+      return peopleStr.replace(/#.*#/,'');
     }
     var wikipage = $routeParams.wikipage || 'Hackers_&_Designers';
     Homepage.fetch(wikipage, function(html) {
