@@ -93,11 +93,11 @@ angular.module('handd', ['ngRoute'])
     $scope.formatTime = function(timeStr) {
       return timeStr.replace(/#.*#/,'');
     };
-    // $scope.formatStr = function(str) {
-    //   str = str.replace(/_/g, ' ');
-    //   str = str.slice(0, str.length - 3);
-    //   return str;
-    // }
+    $scope.formatStr = function(str) {
+      str = str.replace(/_/g, ' ');
+      str = str.slice(0, str.length);
+      return str;
+    }
     var wikipage = $routeParams.wikipage || 'Hackers_&_Designers';
     Homepage.fetch(wikipage, function(html) {
       homepage.html = html;
