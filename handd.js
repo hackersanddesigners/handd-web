@@ -93,11 +93,11 @@ angular.module('handd', ['ngRoute'])
     $scope.formatTime = function(timeStr) {
       return timeStr.replace(/#.*#/,'');
     };
-    $scope.formatStr = function(str) {
-      str = str.replace(/_/g, ' ');
-      str = str.slice(0, str.length - 3);
-      return str;
-    }
+    // $scope.formatStr = function(str) {
+    //   str = str.replace(/_/g, ' ');
+    //   str = str.slice(0, str.length - 3);
+    //   return str;
+    // }
     var wikipage = $routeParams.wikipage || 'Hackers_&_Designers';
     Homepage.fetch(wikipage, function(html) {
       homepage.html = html;
@@ -125,7 +125,7 @@ angular.module('handd', ['ngRoute'])
   };
 
   var fadeOut = function() {
-    document.getElementById('photos').style.display = 'none';  
+    document.getElementById('photos').style.display = 'none';
     document.getElementById('close').style.display = 'none';
   };
 
@@ -134,7 +134,7 @@ angular.module('handd', ['ngRoute'])
   var onMouseDown = function(e) {
     if (e == null) e = $window.event;
     var target = e.target != null ? e.target : e.srcElement;
-   
+
     if ((e.button == 1 && $window.event != null ||
       e.button == 0) &&
       target.className.indexOf('drag') > -1) {
@@ -154,10 +154,10 @@ angular.module('handd', ['ngRoute'])
   };
 
   var onMouseMove = function(e) {
-    if (e == null) var e = window.event; 
+    if (e == null) var e = window.event;
     _dragElement.style.left = (_offsetX + e.clientX - _startX) + 'px';
     _dragElement.style.top = (_offsetY + e.clientY - _startY) + 'px';
-    _dragElement.style.top + ')'; 
+    _dragElement.style.top + ')';
   };
 
   var onMouseUp = function(e) {
@@ -189,11 +189,11 @@ angular.module('handd', ['ngRoute'])
       image.style.left = '' + (Math.random() * (x) - 160) + 'px';
       div.appendChild(image);
     }
-  }); 
+  });
 })
 
 .controller('LeftNavController', function(Ask, $scope, $document) {
-  $scope.title = 'MEETUPS';  
+  $scope.title = 'MEETUPS';
   $scope.showMenu = function($event) {
     angular.element($event.currentTarget).toggleClass('showing');
     angular.element($event.currentTarget).css('z-index', 2);
@@ -209,7 +209,7 @@ angular.module('handd', ['ngRoute'])
 })
 
 .controller('RightNavController', function(Ask, $scope, $document) {
-  $scope.title = 'SUMMER ACADEMY';  
+  $scope.title = 'SUMMER ACADEMY';
   $scope.showMenu = function($event) {
     angular.element($event.currentTarget).toggleClass('showing');
     angular.element($event.currentTarget).css('z-index', 2);
