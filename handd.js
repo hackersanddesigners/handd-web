@@ -97,6 +97,9 @@ angular.module('handd', ['ngRoute'])
       return timeStr.replace(/#.*#/,'');
     };
     $scope.formatStr = function(str) {
+      if(Array.isArray(str)) {
+        str = str[0];
+      }
       str = str.replace(/_/g, ' ');
       return str.replace(/#.*#/,'');
     }
@@ -230,7 +233,7 @@ angular.module('handd', ['ngRoute'])
     var date = new Date(dateObj.fulltext);
     return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
   };
-  Ask.fetchList('Summer Academy', function(objs) {
+  Ask.fetchList('HDSA2015', function(objs) {
     $scope.events = objs;
   });
 })
