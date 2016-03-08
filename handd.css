@@ -151,8 +151,12 @@ ul {
   margin-left: 40px;
 }
 
-.menu p {
-  margin-right: 40px;
+.menu.left p {
+  margin-right: 20px;
+}
+
+.menu.right p {
+  margin-left: 20px;
 }
 
 .menu .list {

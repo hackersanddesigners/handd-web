@@ -89,8 +89,9 @@ angular.module('handd', ['ngRoute'])
     var homepage = this;
     $scope.formatDate = function(date) {
       var dateStr = date[0].item;
-      var items = dateStr.split('/');
-      return items[2].replace(/#.*#/,'') + '/' + items[1] + '/' + items[0];
+      return dateStr.replace(/#.*#/,'');
+      //var items = dateStr.split('/');
+      //return items[2].replace(/#.*#/,'') + '/' + items[1] + '/' + items[0];
     };
     $scope.formatTime = function(time) {
       var timeStr = time[0].item;
@@ -214,8 +215,9 @@ angular.module('handd', ['ngRoute'])
     angular.element($document[0].body.querySelector('.right')).css('z-index', 1);
   };
   $scope.formatDate = function(dateObj) {
-    var date = new Date(dateObj.fulltext);
-    return date.getDate() + '/' + (parseInt(date.getMonth()) + 1) + '/' + date.getFullYear();
+    return dateObj.fulltext;
+    //var date = new Date(dateObj.fulltext);
+    //return date.getDate() + '/' + (parseInt(date.getMonth()) + 1) + '/' + date.getFullYear();
   };
   Ask.fetchList('Meetup', function(objs) {
     $scope.events = objs;
@@ -230,10 +232,11 @@ angular.module('handd', ['ngRoute'])
     angular.element($document[0].body.querySelector('.left')).css('z-index', 1);
   };
   $scope.formatDate = function(dateObj) {
-    var date = new Date(dateObj.fulltext);
-    return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+    return dateObj.fulltext;
+    //var date = new Date(dateObj.fulltext);
+    //return date.getDate() + '/' + (parseInt(date.getMonth()) + 1) + '/' + date.getFullYear();
   };
-  Ask.fetchList('HDSA2015', function(objs) {
+  Ask.fetchList('Summer Academy', function(objs) {
     $scope.events = objs;
   });
 })
