@@ -99,6 +99,12 @@ angular.module('handd', ['ngRoute'])
       return timeStr.replace(/#.*#/,'');
     };
     $scope.formatStr = function(str) {
+      if(Array.isArray(str)) {
+        str = str[0];
+      }
+      if(!(str instanceof String)) {
+        str = str.item;
+      }
       if(str.replace) {
         str = str.replace(/_/g, ' ');
         return str.replace(/#.*#/,'');
