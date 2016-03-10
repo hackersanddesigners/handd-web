@@ -17,7 +17,7 @@ body {
 
 /* Coin shit */
 
-.flipcoin{
+.flipcoin {
   display: block;
   margin: 0 auto;
   background-image: url(flip-coin.png);
@@ -26,9 +26,10 @@ body {
   background-size: contain;
   height: 100vh;
   width: 80vw;
+  z-index: 1;
 }
 
-@-webkit-keyframes rotating {
+@keyframes rotating {
   from {
       -webkit-transform: rotateY(0deg);
       transform: rotateY(0deg);
@@ -107,8 +108,14 @@ body {
   -webkit-transform: rotateY(180deg);
 }
 
-.back {
+.back h1 {
   cursor: pointer;
+  background: #000;
+  border-left: 5px solid #fff;
+  border-right: 5px solid #fff;
+  padding: 10px;
+  box-shadow: 10px 10px 5px #888;
+  
 }
 
 .flip-container.hover .flipper, .flip-container.flip .flipper {
@@ -375,5 +382,4 @@ img {
   height: auto;
 }
 
-
-
+}

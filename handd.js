@@ -1,5 +1,6 @@
 var layoutMenus = true;
 
+
 angular.module('handd', ['ngRoute'])
 .value('wikiUrl', 'http://wiki.hackersanddesigners.nl/mediawiki/api.php')
 .filter('unsafe', function($sce) {
@@ -184,6 +185,14 @@ angular.module('handd', ['ngRoute'])
       _dragElement = null;
     }
   };
+
+  angular.element(document.querySelector('.flipcoin')).on('click', function(e) {
+    angular.element( document.querySelector( '.flip-container' ) ).addClass('flip');
+  });
+
+  angular.element(document.querySelector('.back h1')).on('click', function(e) {
+    angular.element( document.querySelector( '.flip-container' ) ).removeClass('flip');
+  });
 
   Ask.fetchImages(function(objs) {
     if(!photosInitialized) {
