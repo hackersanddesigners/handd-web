@@ -200,6 +200,10 @@ angular.module('handd', ['ngRoute'])
     angular.element( document.querySelector( '.flip-container' ) ).removeClass('flip');
   });
 
+  document.getElementById('photos').style.display = 'block';
+  document.getElementById('close').style.display = 'block';
+
+  /*
   Ask.fetchImages(function(objs) {
     if(!photosInitialized) {
       photosInitialized = true;
@@ -220,6 +224,7 @@ angular.module('handd', ['ngRoute'])
       div.appendChild(image);
     }
   });
+  */
 })
 
 .controller('LeftNavController', function(Ask, $scope, $document) {
