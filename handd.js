@@ -151,7 +151,7 @@ angular.module('handd', ['ngRoute'])
     document.getElementById('close').style.display = 'none';
   };
 
-  document.querySelector('#close').onclick = fadeOut;
+  //document.querySelector('#close').onclick = fadeOut;
 
   var onMouseDown = function(e) {
     if (e == null) e = $window.event;
@@ -194,6 +194,7 @@ angular.module('handd', ['ngRoute'])
 
   angular.element(document.querySelector('.flipcoin')).on('click', function(e) {
     angular.element( document.querySelector( '.flip-container' ) ).addClass('flip');
+    fadeOut();
   });
 
   angular.element(document.querySelector('.back h1')).on('click', function(e) {
