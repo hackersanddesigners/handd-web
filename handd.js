@@ -1,5 +1,19 @@
 var layoutMenus = true;
 
+var adjustLinks = function(element) {
+  var links = element.find('a');
+  for(var index in links) {
+    var el = angular.element(links[index]);
+    var href = el.prop('href');
+    if(href && href.indexOf('File:') != -1) {
+      el.removeAttr('href');
+    } else if(href && href.indexOf('mediawiki') != -1) {
+      var paths = href.split('/');
+      var last = paths[paths.length - 1];
+      el.prop('href', '#/' + last);
+    };
+  }
+};
 
 angular.module('handd', ['ngRoute'])
 .value('wikiUrl', 'http://wiki.hackersanddesigners.nl/mediawiki/api.php')
@@ -26,7 +40,7 @@ angular.module('handd', ['ngRoute'])
           var item = data[i];
           html[item.property] = item.dataitem;
         }
-      console.log(JSON.stringify(html));
+        console.log(JSON.stringify(html));
         callback(html);
       });
     });
@@ -86,7 +100,7 @@ angular.module('handd', ['ngRoute'])
   })
 })
 
-.controller('HomepageController', function(Homepage, $scope, $routeParams) {
+.controller('HomepageController', function(Homepage, $scope, $document, $routeParams) {
     var homepage = this;
     $scope.formatDate = function(date) {
       var dateStr = date[0].item;
@@ -123,6 +137,9 @@ angular.module('handd', ['ngRoute'])
     var wikipage = $routeParams.wikipage || 'Hackers_&_Designers';
     Homepage.fetch(wikipage, function(html) {
       homepage.html = html;
+    });
+    $scope.$watch(function () {
+      adjustLinks(angular.element(document.querySelector('.content')));
     });
 })
 
@@ -299,18 +316,7 @@ angular.module('handd', ['ngRoute'])
   return {
     link: function(scope, element) {
       $timeout(function() {
-        var links = element.find('a');
-        for(var index in links) {
-          var el = angular.element(links[index]);
-          var href = el.prop('href');
-          if(href && href.indexOf('File:') != -1) {
-            el.removeAttr('href');
-          } else if(href && href.indexOf('mediawiki') != -1) {
-            var paths = href.split('/');
-            var last = paths[paths.length - 1];
-            el.prop('href', '#/' + last);
-          };
-        }
+        adjustLinks(element);
       }, 1000);
     }
   };
