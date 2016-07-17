@@ -21,13 +21,13 @@ body {
   cursor: pointer;
   display: block;
   margin: 0 auto;
-  background-image: url(flip-coin.png);
+  background-image: url(Spinning.gif);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   z-index: 1;
-  width: 130px;
-  height: 130px;
+  width: 100px;
+  height: 100px;
   right: 80px;
   top: 20px;
   position: fixed;
