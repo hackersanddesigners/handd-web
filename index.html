@@ -14,65 +14,53 @@
 
   </head>
   <body>
-    <div class="flip-container">
-      <div class="flipper">
-        <div class="front">
-          <div ng-controller="LeftNavController">
-            <div class="menu left" ng-click="showMenu($event)">
-              <h1 class="title vertical-text left">{{ title }}</h1>
-              <ul class="links">
-                <li><a href="#/">about</a></li>
-                <li><a href="mailto:info@hackersanddesigners.nl">contact</a></li>
-                <li><a href="http://eepurl.com/bjue1D">newsletter</a></li>
-              </ul>
-              <div class="list">
-                <div class="item" ng-repeat="item in events">
-                  <a ng-href="#/{{item.fulltext}}">
-                    <p class="date">{{ formatDate(item.printouts.OnDate[0]) }}</p>
-                    <p>{{item.fulltext}}</p>
-                  </a>
-                </div>
-              </div>
-            </div>
+    <div ng-controller="LeftNavController">
+      <div class="menu left" ng-click="showMenu($event)">
+        <h1 class="title vertical-text left">{{ title }}</h1>
+        <ul class="links">
+          <li><a href="#/">about</a></li>
+          <li><a href="mailto:info@hackersanddesigners.nl">contact</a></li>
+          <li><a href="http://eepurl.com/bjue1D">newsletter</a></li>
+        </ul>
+        <div class="list">
+          <div class="item" ng-repeat="item in events">
+            <a ng-href="#/{{item.fulltext}}">
+              <p class="date">{{ formatDate(item.printouts.OnDate[0]) }}</p>
+              <p>{{item.fulltext}}</p>
+            </a>
           </div>
-          <div ng-controller="HomepageController">
-            <div ng-view></div>
+        </div>
+      </div>
+    </div>
+    <div ng-controller="HomepageController">
+      <div ng-view></div>
+    </div>
+    <div ng-controller="RightNavController">
+      <div class="menu right" ng-click="showMenu($event)">
+        <h1 class="title vertical-text right">{{ title }}</h1>
+        <ul class="links">
+          <li><a href="#/Hackers_%26_Designers_Summer_Academy">about</a></li>
+          <li><a href="mailto:info@hackersanddesigners.nl">contact</a></li>
+          <li><a href="https://jbg1.typeform.com/to/eq8l6T">newsletter</a></li>
+        </ul>
+        <div class="list">
+          <div class="item" ng-repeat="item in events">
+            <a ng-href="#/{{item.fulltext}}">
+              <p class="date">{{ formatDate(item.printouts.OnDate[0]) }}</p>
+              <p>{{item.fulltext}}</p>
+            </a>
           </div>
-          <div ng-controller="RightNavController">
-            <div class="menu right" ng-click="showMenu($event)">
-              <h1 class="title vertical-text right">{{ title }}</h1>
-              <ul class="links">
-                <li><a href="#/Hackers_%26_Designers_Summer_Academy">about</a></li>
-                <li><a href="mailto:info@hackersanddesigners.nl">contact</a></li>
-                <li><a href="https://jbg1.typeform.com/to/eq8l6T">newsletter</a></li>
-              </ul>
-              <div class="list">
-                <div class="item" ng-repeat="item in events">
-                  <a ng-href="#/{{item.fulltext}}">
-                    <p class="date">{{ formatDate(item.printouts.OnDate[0]) }}</p>
-                    <p>{{item.fulltext}}</p>
-                  </a>
-                </div>
-              </div>
-            </div>      
-          </div>
-          <div ng-controller="PicsController">
-            <div class="flipcoin"></div>
-            <!--
-            <div id="photos">
-            </div>
-            -->
-            <!-- <a id="close">X</a> -->
-          </div>
-        </div> <!-- front -->
-        <div class="back">
-          <h1 style="position: absolute; left: 10px; top: 10px;">BACK</h1>
-          <iframe src="http://summer.hackersanddesigners.nl" width="100%" height="100%">
-            <p>Your browser does not support iframes.  You lose. :-(</p>
-          </iframe>
-        </div> <!-- back -->
-      </div> <!-- flipper -->
-    </div> <!-- flip container -->
+        </div>
+      </div>      
+    </div>
+    <div ng-controller="PicsController">
+      <div class="flipcoin"></div>
+      <!--
+      <div id="photos">
+      </div>
+      -->
+      <!-- <a id="close">X</a> -->
+    </div>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

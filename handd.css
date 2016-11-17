@@ -15,127 +15,14 @@ body {
   overflow: hidden;
 }
 
-/* Coin shit */
-
-.flipcoin {
-  cursor: pointer;
-  display: block;
-  margin: 0 auto;
-  background-image: url(Spinning.gif);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  z-index: 1;
-  width: 100px;
-  height: 100px;
-  right: 80px;
-  top: 20px;
-  position: fixed;
+pre {
+  font-family: "Courier 10 Pitch", Courier, monospace;
+  margin: 50px;
+  font-size: 24px;
+  overflow: hidden;
+  background: #222;
+  padding: 20px;
 }
-
-@keyframes rotating {
-  0% {
-      -webkit-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-  }
-  100% {
-      -webkit-transform: rotateY(360deg);
-      transform: rotateY(360deg);
-  }
-}
-
-.rotating {
-  -webkit-animation: rotating 4s linear infinite;
-  animation: rotating 4s linear infinite;
-}
-
-/* Flipping stuff */
-
-.flip-container, .flipper, .front, .back {
-  height: 100%;
-  width: 100%;
-}
-
-.flipper, .front, .back {
-  z-index: 0;
-}
-
-.front {
-  z-index: -2;
-}
-
-.flip-container {
-  position: relative;
-  perspective: 1000px;
-  -webkit-perspective: 1000px;
-}
-
-
-/*
-.flip-container:hover .flipper, .flip-container.hover .flipper {
-  transform: rotateY(5deg);
-  -webkit-transform: rotateY(5deg);
-}
-
-.flip-container.flip:hover .flipper, .flip-container.flip.hover .flipper {
-  transform: rotateY(175deg);
-  -webkit-transform: rotateY(175deg);
-}
-*/
-
-.flipper {
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-
-  transition: all 0.25s linear;
-  -webkit-transition: all 0.25s linear;
-
-  position: relative;
-}
-
-.front, .back {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-
-  box-shadow: -5px 5px 5px #999;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.back {
-  color: #fff;
-  font-size: 17px;
-  display: table;
-
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-}
-
-.back h1 {
-  cursor: pointer;
-  background: #000;
-  border-left: 5px solid #fff;
-  border-right: 5px solid #fff;
-  padding: 10px;
-  box-shadow: 10px 10px 5px #888;
-  
-}
-
-.flip-container.hover .flipper, .flip-container.flip .flipper {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-}
-
-iframe {
-  display: block;       /* iframes are inline by default */
-  background: #000;
-  border: none;         /* Reset default border */
-  height: 100vh;        /* Viewport-relative units */
-  width: 100vw;
-}
-
-/* End flipping stuff */
 
 table {
   display: none;
@@ -361,6 +248,8 @@ ul {
   -moz-box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.75);
 }
+
+
 
 /* RESPONSIVE - JBG */
 
