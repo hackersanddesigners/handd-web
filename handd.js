@@ -16,7 +16,7 @@ var adjustLinks = function(element) {
 };
 
 angular.module('handd', ['ngRoute'])
-.value('wikiUrl', 'http://wiki.hackersanddesigners.nl/mediawiki/api.php')
+.value('wikiUrl', 'https://wiki.hackersanddesigners.nl/mediawiki/api.php')
 .filter('unsafe', function($sce) {
   return function(val) {
     return $sce.trustAsHtml(val);
@@ -27,6 +27,7 @@ angular.module('handd', ['ngRoute'])
   var self = this;
   this.fetch = function(wikipage, callback) {
     var wikiApiUrl = wikiUrl+'?action=parse&page=' + encodeURIComponent(wikipage) + '&format=json&disableeditsection=true';
+		console.log(wikiApiUrl);
     $http.get(wikiApiUrl).then(function(res) {
       var obj = res.data;
       html = {
