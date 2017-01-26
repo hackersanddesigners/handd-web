@@ -287,7 +287,7 @@ angular.module('handd', ['ngRoute'])
         var images = element.find('img');
         for(var index in images) {
           var el = angular.element(images[index]);
-          var wikiUrl = 'http://wiki.hackersanddesigners.nl';
+          var wikiUrl = 'https://wiki.hackersanddesigners.nl';
           // Fix src attr - JBG
           var src = el.prop('src');
           if(src) {
